@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Debts</string>
+    <string name="input_debtor">Input debtor</string>
+    <string name="input_creditor">Input creditor</string>
+    <string name="input_money">Input money</string>
+    <string name="input_description">Input description</string>
+    <string name="input_username">Input username</string>
+    <string name="input_password">Input password</string>
+</resources>
