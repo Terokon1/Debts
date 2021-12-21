@@ -1,15 +1,15 @@
-package com.chaev.debts.presentation.create
+package com.chaev.debts.ui.create
 
 import com.chaev.debts.App
 import com.chaev.debts.data.models.request.DebtRequest
 import com.chaev.debts.domain.mappers.MappingException
-import com.chaev.debts.presentation.debts.DebtsFragment
+import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreatePresenter(val router: Router) {
+class CreatePresenter(private val router: Router, private val debtsApiRepository : DebtsApiRepository)  {
     private var view: CreateFragment? = null
     private val scope = CoroutineScope(Dispatchers.IO)
     fun attachView(fragment: CreateFragment) {
@@ -28,7 +28,7 @@ class CreatePresenter(val router: Router) {
         if (creditor.isNotEmpty() && debtor.isNotEmpty() && money.isNotEmpty()) {
             val newDebt = DebtRequest(money, creditor, debtor, description)
             scope.launch {
-                App.INSTANCE.debtsApiRepository.postDebt(newDebt)
+                debtsApiRepository.postDebt(newDebt)
                 navigateBack()
             }
         } else {

@@ -1,10 +1,10 @@
 package com.chaev.debts.data.models.response
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class LoginResponse(
-    @SerializedName("access")
+    @field:Json(name = "access")
     val accessToken: String?,
-    @SerializedName("refresh")
+    @field:Json (name = "refresh")
     val refreshToken: String?
 )

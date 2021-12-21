@@ -1,10 +1,10 @@
 package com.chaev.debts.data.models.request
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class LoginRequest(
-    @SerializedName("username")
+    @field:Json(name = "username")
     val username: String?,
-    @SerializedName("password")
+    @field:Json (name = "password")
     val password: String?
 )

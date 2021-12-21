@@ -3,12 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout-v24/activity_main.xml" value="0.35597826086956524" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/activity_main.xml" value="0.36594202898550726" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/debt_item.xml" value="0.33" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_add_friend.xml" value="0.25" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_create.xml" value="0.36594202898550726" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_debts.xml" value="0.36594202898550726" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_friend_request.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_friends.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/friend_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/header_navigation_drawer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_debt.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_friend.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_friend_request.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/sdfg.xml" value="0.20520833333333333" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/menu/navigation_drawer.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>

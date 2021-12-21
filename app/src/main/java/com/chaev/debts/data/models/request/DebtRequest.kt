@@ -1,15 +1,16 @@
 package com.chaev.debts.data.models.request
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
+
 
 data class DebtRequest(
-    @SerializedName("money")
+    @field:Json(name = "money")
     val money: String?,
-    @SerializedName("creditor")
+    @field:Json (name = "creditor")
     val creditor: String?,
-    @SerializedName("debtor")
+    @field:Json (name = "debtor")
     val debtor: String?,
-    @SerializedName("description")
+    @field:Json (name = "description")
     val description: String?
 )
 

@@ -1,16 +1,18 @@
 package com.chaev.debts.data.models.response
 
-import com.google.gson.annotations.SerializedName
+import com.chaev.debts.data.models.base.User
+import com.squareup.moshi.Json
+
 
 data class DebtResponse(
-    @SerializedName("id")
-    val id: Int?,
-    @SerializedName("money")
+    @field:Json(name = "id")
+    val id: String?,
+    @field:Json(name = "money")
     val money: String?,
-    @SerializedName("creditor")
-    val creditor: String?,
-    @SerializedName("debtor")
-    val debtor: String?,
-    @SerializedName("created")
+    @field:Json(name = "creditor")
+    val creditor: User?,
+    @field:Json(name = "debtor")
+    val debtor: User?,
+    @field:Json(name = "created")
     val created: String?
 )

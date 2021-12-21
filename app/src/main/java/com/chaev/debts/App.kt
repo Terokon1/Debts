@@ -2,22 +2,24 @@ package com.chaev.debts
 
 import android.app.Application
 import com.chaev.debts.data.api.RetrofitBuilder
+import com.chaev.debts.domain.koin.appModule
 import com.chaev.debts.domain.repositories.DebtsApiRepository
-import com.chaev.debts.presentation.create.CreatePresenter
-import com.chaev.debts.presentation.debts.DebtsPresenter
-import com.chaev.debts.presentation.login.LoginPresenter
+import com.chaev.debts.ui.create.CreatePresenter
+import com.chaev.debts.ui.debts.DebtsPresenter
+import com.chaev.debts.ui.login.LoginPresenter
 import com.github.terrakok.cicerone.Cicerone
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class App : Application() {
-    private val cicerone = Cicerone.create()
-    private val router get() = cicerone.router
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-    val debtsPresenter = DebtsPresenter(router)
-    val createPresenter = CreatePresenter(router)
-    val loginPresenter = LoginPresenter(router)
-    val debtsApiRepository = DebtsApiRepository(RetrofitBuilder.apiService)
     override fun onCreate() {
         super.onCreate()
+        startKoin {
+            androidLogger()
+            androidContext(this@App)
+            modules(appModule)
+        }
         INSTANCE = this
     }
 

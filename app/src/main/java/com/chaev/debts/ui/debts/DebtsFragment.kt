@@ -1,4 +1,4 @@
-package com.chaev.debts.presentation.debts
+package com.chaev.debts.ui.debts
 
 import android.content.Context
 import android.os.Bundle
@@ -10,15 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaev.debts.App
 import com.chaev.debts.databinding.FragmentDebtsBinding
 import com.chaev.debts.domain.models.Debt
+import org.koin.android.ext.android.inject
+import org.koin.java.KoinJavaComponent.inject
 
 class DebtsFragment : Fragment() {
     private lateinit var binding: FragmentDebtsBinding
-    private var presenter: DebtsPresenter? = null
+private val presenter: DebtsPresenter by inject()
     private var adapter = DebtsAdapter(listOf())
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        presenter = (requireActivity().application as App).debtsPresenter
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,16 +29,15 @@ class DebtsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter?.attachView(this)
-        presenter?.collectDebts()
+        presenter.attachView(this)
         binding.debtsRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.debtsRecycler.adapter = adapter
-        binding.createButton.setOnClickListener { presenter?.onCreateClicked() }
+        binding.createButton.setOnClickListener { presenter.onCreateClicked() }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        presenter?.detachView()
+        presenter.detachView()
     }
 
     fun fillRecycler(debts: List<Debt>) {
