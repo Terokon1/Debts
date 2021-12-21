@@ -1,6 +1,7 @@
 package com.chaev.debts.domain.repositories
 
 import com.chaev.debts.data.api.ApiService
+import com.chaev.debts.data.models.debt.DebtRequest
 import com.chaev.debts.data.models.request.*
 import com.chaev.debts.domain.mappers.*
 import com.chaev.debts.domain.models.Debt
@@ -19,7 +20,9 @@ class DebtsApiRepository(private val api: ApiService) {
     }
 
     suspend fun updateAccessToken(token: String) = Either.of {
-        accessToken = "Bearer ${AccessMapper.fromRaw(api.getNewAccessToken(RefreshRequest(token))).token}"
+        val tokens = TokensMapper.fromRaw(api.getNewTokens(RefreshRequest(token)))
+        accessToken = "Bearer ${tokens.access}"
+        refreshToken = tokens.refresh
     }
 
     suspend fun getDebts(): Either<Exception, List<Debt>> = Either.of {

@@ -1,5 +1,7 @@
 package com.chaev.debts.data.api
 
+import com.chaev.debts.data.models.debt.DebtRequest
+import com.chaev.debts.data.models.debt.DebtResponse
 import com.chaev.debts.data.models.request.*
 import com.chaev.debts.data.models.response.*
 import retrofit2.http.*
@@ -9,7 +11,7 @@ interface ApiService {
     suspend fun authorize(@Body login: LoginRequest): LoginResponse
 
     @POST("/accounts/token/refresh/")
-    suspend fun getNewAccessToken(@Body refreshToken: RefreshRequest): AccessResponse
+    suspend fun getNewTokens(@Body refreshToken: RefreshRequest): AccessResponse
 
     @GET("/debts/")
     suspend fun getDebts(

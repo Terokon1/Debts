@@ -1,6 +1,6 @@
 package com.chaev.debts.domain.mappers
 
-import com.chaev.debts.data.models.response.DebtResponse
+import com.chaev.debts.data.models.debt.DebtResponse
 import com.chaev.debts.domain.models.Debt
 
 object DebtsMapper {

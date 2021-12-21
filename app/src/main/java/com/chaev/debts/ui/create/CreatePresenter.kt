@@ -1,7 +1,6 @@
 package com.chaev.debts.ui.create
 
-import com.chaev.debts.App
-import com.chaev.debts.data.models.request.DebtRequest
+import com.chaev.debts.data.models.debt.DebtRequest
 import com.chaev.debts.domain.mappers.MappingException
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.github.terrakok.cicerone.Router
