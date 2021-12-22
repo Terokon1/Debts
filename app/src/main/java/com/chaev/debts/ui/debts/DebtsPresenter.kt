@@ -23,11 +23,12 @@ class DebtsPresenter(
 ) {
     private val scope = CoroutineScope(Dispatchers.IO)
     private var view: DebtsFragment? = null
+    private var items = emptyList<Debt>()
 
     init {
         scope.launch {
-            val debts = getDebts()
-            withContext(Dispatchers.Main) { view?.fillRecycler(debts) }
+            items = getDebts()
+            withContext(Dispatchers.Main) { view?.fillRecycler(items) }
         }
     }
 

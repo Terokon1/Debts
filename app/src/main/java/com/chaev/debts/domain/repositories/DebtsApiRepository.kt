@@ -29,7 +29,7 @@ class DebtsApiRepository(private val api: ApiService) {
         DebtsMapper.multipleFromRaw(api.getDebts(accessToken))
     }
 
-    suspend fun postDebt(debt: DebtRequest) {
+    suspend fun postDebt(debt: DebtRequest): Either<Exception, Unit> = Either.of {
         api.postDebt(accessToken, debt)
     }
 
@@ -45,11 +45,11 @@ class DebtsApiRepository(private val api: ApiService) {
         FriendRequestsMapper.multipleFromRaw(api.getFriendRequests(accessToken))
     }
 
-    suspend fun patchFriendRequest(patch: FriendReqPatch) {
+    suspend fun patchFriendRequest(patch: FriendReqPatch): Either<Exception, Unit> = Either.of {
         api.patchFriendRequest(accessToken, patch)
     }
 
-    suspend fun postFriendRequest(username: String) {
+    suspend fun postFriendRequest(username: String): Either<Exception, Unit> = Either.of {
         api.postFriendRequest(accessToken, AddFriendRequest(username))
     }
 }

@@ -51,11 +51,4 @@ class LoginFragment : BaseFragment() {
             Toast.LENGTH_SHORT
         ).show()
     }
-
-    fun showNavigation() {
-        (requireActivity() as MainActivity).binding.barLayout.visibility = View.VISIBLE
-        (requireActivity() as MainActivity).binding.drawerLayout.setDrawerLockMode(
-            LOCK_MODE_UNLOCKED
-        )
-    }
 }

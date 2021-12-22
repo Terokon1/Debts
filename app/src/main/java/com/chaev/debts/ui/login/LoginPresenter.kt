@@ -38,7 +38,6 @@ class LoginPresenter(
                     is Right -> {
                         debtsApiRepository.setupTokens(r.value.accessToken, r.value.refreshToken)
                         USERNAME = username
-                        withContext(Dispatchers.Main) { view?.showNavigation() }
                         navigateSuccessLogin()
                     }
                 }

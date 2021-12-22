@@ -1,6 +1,9 @@
 package com.chaev.debts.ui.add
 
+import android.util.Log
 import com.chaev.debts.domain.repositories.DebtsApiRepository
+import com.chaev.debts.utils.Left
+import com.chaev.debts.utils.Right
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,13 +19,21 @@ class AddFriendPresenter(private val router: Router, private val repository: Deb
     fun onDetach() {
         view = null
     }
-    fun navigateBack(){
+
+    fun navigateBack() {
         router.exit()
     }
 
     fun addFriendClicked(username: String) {
         scope.launch {
-            repository.postFriendRequest(username)
+            when (val r = repository.postFriendRequest(username)) {
+                is Right -> {
+                    navigateBack()
+                }
+                is Left -> {
+                    Log.d("Debug", "Add Friend failed", r.value)
+                }
+            }
         }
     }
 }

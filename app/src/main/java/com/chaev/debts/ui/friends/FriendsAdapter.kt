@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chaev.debts.databinding.ItemFriendBinding
 import com.chaev.debts.domain.models.Friend
 
-class FriendsAdapter(var friends: List<Friend>) :
+class FriendsAdapter :
     RecyclerView.Adapter<FriendsAdapter.ViewHolder>() {
+    var friends: List<Friend> = emptyList()
     class ViewHolder(private val binding: ItemFriendBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(friend: Friend) {

@@ -10,7 +10,7 @@ import com.chaev.debts.App
 import com.chaev.debts.databinding.FragmentCreateBinding
 import org.koin.android.ext.android.inject
 
-class CreateFragment:Fragment() {
+class CreateFragment : Fragment() {
     private lateinit var binding: FragmentCreateBinding
     private val presenter: CreatePresenter by inject()
     override fun onCreateView(
@@ -38,4 +38,6 @@ class CreateFragment:Fragment() {
         super.onDestroyView()
         presenter.detachView()
     }
+
+
 }

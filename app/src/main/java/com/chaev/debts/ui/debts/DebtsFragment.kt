@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaev.debts.App
 import com.chaev.debts.databinding.FragmentDebtsBinding
 import com.chaev.debts.domain.models.Debt
+import com.chaev.debts.ui.base.BaseFragment
 import org.koin.android.ext.android.inject
 import org.koin.java.KoinJavaComponent.inject
 
-class DebtsFragment : Fragment() {
+class DebtsFragment : BaseFragment() {
     private lateinit var binding: FragmentDebtsBinding
-private val presenter: DebtsPresenter by inject()
-    private var adapter = DebtsAdapter(listOf())
+    private val presenter: DebtsPresenter by inject()
+    private var adapter = DebtsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,

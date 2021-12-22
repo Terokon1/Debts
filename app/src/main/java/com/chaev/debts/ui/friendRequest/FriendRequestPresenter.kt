@@ -16,35 +16,43 @@ class FriendRequestPresenter(private val debtsApiRepository: DebtsApiRepository)
     private val scope = CoroutineScope(Dispatchers.IO)
     private var view: FriendRequestFragment? = null
     private var items: List<FriendRequest> = emptyList()
+
+    init {
+        scope.launch {
+            items = getFriendRequests()
+            withContext(Dispatchers.Main) { view?.updateRecycler(items) }
+        }
+    }
+
     fun attachView(fragment: FriendRequestFragment) {
         view = fragment
-
-        view?.fillRecycler(items)
+        view?.updateRecycler(items)
     }
 
     fun detachView() {
         view = null
     }
 
-    fun collectFriendRequests() {
-        scope.launch {
-            items = getFriendRequests()
-            withContext(Dispatchers.Main) { view?.fillRecycler(items) }
-        }
-    }
-
     fun responseButtonsClickListener(id: String, status: RequestStatus) {
         scope.launch {
-            debtsApiRepository.patchFriendRequest(
+            when (val r = debtsApiRepository.patchFriendRequest(
                 FriendReqPatch(
                     id,
                     status.toString()
                 )
-            )
-            items = items.filter { it.id != id }
-            withContext(Dispatchers.Main) { view?.fillRecycler(items) }
-        }
+            )) {
+                is Right -> {
+                    items = items.filter { it.id != id }
+                    withContext(Dispatchers.Main) { view?.updateRecycler(items) }
+                }
+                is Left -> {
+                    Log.d("Debug", "Failed to patch", r.value)
+                    view?.showPatchError()
+                }
 
+            }
+
+        }
     }
 
     private suspend fun getFriendRequests(): List<FriendRequest> =

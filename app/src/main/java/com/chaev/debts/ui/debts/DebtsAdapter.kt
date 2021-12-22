@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chaev.debts.databinding.ItemDebtBinding
 import com.chaev.debts.domain.models.Debt
 
-class DebtsAdapter(var debts: List<Debt>) : RecyclerView.Adapter<DebtsAdapter.ViewHolder>() {
+class DebtsAdapter : RecyclerView.Adapter<DebtsAdapter.ViewHolder>() {
+    var debts: List<Debt> = emptyList()
     class ViewHolder(private val binding: ItemDebtBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(debt: Debt) {
             binding.moneyView.text = debt.money

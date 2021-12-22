@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaev.debts.databinding.FragmentFriendsBinding
 import com.chaev.debts.domain.models.Debt
 import com.chaev.debts.domain.models.Friend
+import com.chaev.debts.ui.base.BaseFragment
 import org.koin.android.ext.android.inject
 
-class FriendsFragment : Fragment() {
+class FriendsFragment : BaseFragment() {
     private lateinit var binding: FragmentFriendsBinding
     private val presenter: FriendsPresenter by inject()
-    private val adapter = FriendsAdapter(listOf())
+    private val adapter = FriendsAdapter()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,7 +28,6 @@ class FriendsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.attachView(this)
-        presenter.collectFriends()
         binding.friendsList.adapter = adapter
         binding.friendsList.layoutManager = LinearLayoutManager(requireContext())
         binding.addButton.setOnClickListener { presenter.navigateAddFriend() }
@@ -39,7 +39,7 @@ class FriendsFragment : Fragment() {
         presenter.detachView()
     }
 
-    fun fillRecycler(friends: List<Friend>) {
+    fun updateRecycler(friends: List<Friend>) {
         adapter.friends = friends
         adapter.notifyDataSetChanged()
     }

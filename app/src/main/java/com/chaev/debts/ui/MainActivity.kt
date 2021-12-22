@@ -83,5 +83,8 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
 
     private fun onFragmentChanged(fragment: Fragment) {
         binding.drawerLayout.setDrawerLockMode(if (fragment is LoginFragment) LOCK_MODE_LOCKED_CLOSED else LOCK_MODE_UNLOCKED)
+        binding.barLayout.visibility =
+            if (fragment is LoginFragment) View.INVISIBLE else View.VISIBLE
+
     }
 }
