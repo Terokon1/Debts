@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.debts
+package com.chaev.debts.ui.debt.debts
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -1,6 +1,5 @@
-package com.chaev.debts.ui.debtRequest
+package com.chaev.debts.ui.debt.debtRequest
 
-import androidx.fragment.app.Fragment
 import com.chaev.debts.ui.base.BaseFragment
 
 class DebtRequestFragment: BaseFragment() {

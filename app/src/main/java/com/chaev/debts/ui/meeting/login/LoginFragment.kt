@@ -1,16 +1,11 @@
-package com.chaev.debts.ui.login
+package com.chaev.debts.ui.meeting.login
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
-import androidx.fragment.app.Fragment
-import com.chaev.debts.App
 import com.chaev.debts.databinding.FragmentLoginBinding
-import com.chaev.debts.ui.MainActivity
 import com.chaev.debts.ui.base.BaseFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

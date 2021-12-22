@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.login
+package com.chaev.debts.ui.meeting.login
 
 import com.chaev.debts.Screens
 import com.chaev.debts.data.models.login.LoginRequest

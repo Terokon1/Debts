@@ -5,6 +5,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class AddFriendRequest(
-    @field:Json (name = "username")
+    @field:Json(name = "username")
     val username: String
 )

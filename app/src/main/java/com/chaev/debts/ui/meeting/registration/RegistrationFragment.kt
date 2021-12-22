@@ -1,6 +1,5 @@
-package com.chaev.debts.ui.registration
+package com.chaev.debts.ui.meeting.registration
 
-import androidx.fragment.app.Fragment
 import com.chaev.debts.ui.base.BaseFragment
 
 class RegistrationFragment: BaseFragment() {

@@ -1,11 +1,10 @@
-package com.chaev.debts.ui.add
+package com.chaev.debts.ui.friend.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.chaev.debts.databinding.FragmentAddFriendBinding
 import com.chaev.debts.ui.base.BaseFragment
 import org.koin.android.ext.android.inject

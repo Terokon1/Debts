@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.add
+package com.chaev.debts.ui.friend.add
 
 import android.util.Log
 import com.chaev.debts.domain.repositories.DebtsApiRepository

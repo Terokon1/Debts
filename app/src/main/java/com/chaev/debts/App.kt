@@ -1,13 +1,7 @@
 package com.chaev.debts
 
 import android.app.Application
-import com.chaev.debts.data.api.RetrofitBuilder
 import com.chaev.debts.domain.koin.appModule
-import com.chaev.debts.domain.repositories.DebtsApiRepository
-import com.chaev.debts.ui.create.CreatePresenter
-import com.chaev.debts.ui.debts.DebtsPresenter
-import com.chaev.debts.ui.login.LoginPresenter
-import com.github.terrakok.cicerone.Cicerone
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

@@ -4,12 +4,12 @@ import com.chaev.debts.data.api.RetrofitBuilder
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
-import com.chaev.debts.ui.add.AddFriendPresenter
+import com.chaev.debts.ui.friend.add.AddFriendPresenter
 import com.chaev.debts.ui.create.CreatePresenter
-import com.chaev.debts.ui.debts.DebtsPresenter
-import com.chaev.debts.ui.friendRequest.FriendRequestPresenter
-import com.chaev.debts.ui.friends.FriendsPresenter
-import com.chaev.debts.ui.login.LoginPresenter
+import com.chaev.debts.ui.debt.debts.DebtsPresenter
+import com.chaev.debts.ui.friend.friendRequest.FriendRequestPresenter
+import com.chaev.debts.ui.friend.friends.FriendsPresenter
+import com.chaev.debts.ui.meeting.login.LoginPresenter
 import org.koin.dsl.module
 
 val appModule = module {

@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.friendRequest
+package com.chaev.debts.ui.friend.friendRequest
 
 import android.util.Log
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch

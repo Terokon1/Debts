@@ -1,11 +1,11 @@
 package com.chaev.debts
 
-import com.chaev.debts.ui.add.AddFriendFragment
+import com.chaev.debts.ui.friend.add.AddFriendFragment
 import com.chaev.debts.ui.create.CreateFragment
-import com.chaev.debts.ui.debts.DebtsFragment
-import com.chaev.debts.ui.friendRequest.FriendRequestFragment
-import com.chaev.debts.ui.friends.FriendsFragment
-import com.chaev.debts.ui.login.LoginFragment
+import com.chaev.debts.ui.debt.debts.DebtsFragment
+import com.chaev.debts.ui.friend.friendRequest.FriendRequestFragment
+import com.chaev.debts.ui.friend.friends.FriendsFragment
+import com.chaev.debts.ui.meeting.login.LoginFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {

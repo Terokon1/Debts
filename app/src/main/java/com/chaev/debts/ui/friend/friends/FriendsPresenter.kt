@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.friends
+package com.chaev.debts.ui.friend.friends
 
 import android.util.Log
 import com.chaev.debts.Screens

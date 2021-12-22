@@ -13,7 +13,7 @@ import com.chaev.debts.Screens
 import com.chaev.debts.databinding.ActivityMainBinding
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.ui.base.IFragmentHolder
-import com.chaev.debts.ui.login.LoginFragment
+import com.chaev.debts.ui.meeting.login.LoginFragment
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.android.ext.android.inject
 

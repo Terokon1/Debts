@@ -6,6 +6,6 @@ import com.squareup.moshi.Json
 data class FriendReqResponse(
     @field:Json(name = "id")
     val id: String?,
-    @field:Json (name = "user")
+    @field:Json(name = "user")
     val user: User?
 )

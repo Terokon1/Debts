@@ -1,4 +1,4 @@
-package com.chaev.debts.ui.friendRequest
+package com.chaev.debts.ui.friend.friendRequest
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
