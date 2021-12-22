@@ -1,8 +1,11 @@
 package com.chaev.debts.domain.repositories
 
 import com.chaev.debts.data.api.ApiService
+import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequest
-import com.chaev.debts.data.models.request.*
+import com.chaev.debts.data.models.friendRequest.FriendReqPatch
+import com.chaev.debts.data.models.login.LoginRequest
+import com.chaev.debts.data.models.tokens.RefreshRequest
 import com.chaev.debts.domain.mappers.*
 import com.chaev.debts.domain.models.Debt
 import com.chaev.debts.domain.models.Friend

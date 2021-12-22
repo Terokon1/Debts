@@ -1,6 +1,7 @@
 package com.chaev.debts.domain.mappers
 
-import com.chaev.debts.data.models.response.FriendReqResponse
+import com.chaev.debts.data.models.friendRequest.FriendReqResponse
+import com.chaev.debts.domain.exceptions.MappingException
 import com.chaev.debts.domain.models.FriendRequest
 
 object FriendRequestsMapper {

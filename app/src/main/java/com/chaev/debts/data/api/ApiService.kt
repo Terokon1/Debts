@@ -1,9 +1,15 @@
 package com.chaev.debts.data.api
 
+import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequest
 import com.chaev.debts.data.models.debt.DebtResponse
-import com.chaev.debts.data.models.request.*
-import com.chaev.debts.data.models.response.*
+import com.chaev.debts.data.models.friendRequest.FriendReqPatch
+import com.chaev.debts.data.models.friendRequest.FriendReqResponse
+import com.chaev.debts.data.models.friends.FriendResponse
+import com.chaev.debts.data.models.login.LoginRequest
+import com.chaev.debts.data.models.login.LoginResponse
+import com.chaev.debts.data.models.tokens.AccessResponse
+import com.chaev.debts.data.models.tokens.RefreshRequest
 import retrofit2.http.*
 
 interface ApiService {

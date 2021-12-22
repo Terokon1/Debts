@@ -1,7 +1,7 @@
 package com.chaev.debts.ui.friendRequest
 
 import android.util.Log
-import com.chaev.debts.data.models.request.FriendReqPatch
+import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.domain.models.FriendRequest
 import com.chaev.debts.domain.models.RequestStatus
 import com.chaev.debts.domain.repositories.DebtsApiRepository

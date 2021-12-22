@@ -1,4 +1,4 @@
-package com.chaev.debts.data.models.response
+package com.chaev.debts.data.models.friends
 
 import com.squareup.moshi.Json
 

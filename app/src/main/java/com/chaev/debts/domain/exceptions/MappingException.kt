@@ -1,4 +1,4 @@
-package com.chaev.debts.domain.mappers
+package com.chaev.debts.domain.exceptions
 
 import java.lang.RuntimeException
 

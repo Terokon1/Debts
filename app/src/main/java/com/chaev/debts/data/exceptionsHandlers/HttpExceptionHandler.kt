@@ -1,22 +1,12 @@
-package com.chaev.debts.domain.repositories
+package com.chaev.debts.data.exceptionsHandlers
 
 import android.util.Log
 import com.chaev.debts.Screens
-import com.chaev.debts.domain.cicerone.CiceroneHolder
-import com.chaev.debts.utils.Either
+import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.utils.Left
 import com.chaev.debts.utils.Right
-import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
-import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
 import retrofit2.HttpException
-import retrofit2.Response
-import java.lang.Exception
 
 class HttpExceptionHandler(
     private val apiRepository: DebtsApiRepository,

@@ -3,7 +3,7 @@ package com.chaev.debts.domain.koin
 import com.chaev.debts.data.api.RetrofitBuilder
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.domain.repositories.DebtsApiRepository
-import com.chaev.debts.domain.repositories.HttpExceptionHandler
+import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.ui.add.AddFriendPresenter
 import com.chaev.debts.ui.create.CreatePresenter
 import com.chaev.debts.ui.debts.DebtsPresenter
