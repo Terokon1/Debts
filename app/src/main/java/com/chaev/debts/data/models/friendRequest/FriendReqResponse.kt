@@ -1,6 +1,6 @@
 package com.chaev.debts.data.models.friendRequest
 
-import com.chaev.debts.data.models.base.User
+import com.chaev.debts.domain.models.base.User
 import com.squareup.moshi.Json
 
 data class FriendReqResponse(

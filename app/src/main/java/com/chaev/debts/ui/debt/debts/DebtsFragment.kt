@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaev.debts.databinding.FragmentDebtsBinding
-import com.chaev.debts.domain.models.Debt
+import com.chaev.debts.domain.models.debt.Debt
 import com.chaev.debts.ui.base.BaseFragment
 import org.koin.android.ext.android.inject
 

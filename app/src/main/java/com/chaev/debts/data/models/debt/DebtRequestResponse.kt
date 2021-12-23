@@ -3,8 +3,7 @@ package com.chaev.debts.data.models.debt
 import com.chaev.debts.domain.models.base.User
 import com.squareup.moshi.Json
 
-
-data class DebtResponse(
+data class DebtRequestResponse(
     @field:Json(name = "id")
     val id: String?,
     @field:Json(name = "money")
@@ -13,6 +12,12 @@ data class DebtResponse(
     val creditor: User?,
     @field:Json(name = "debtor")
     val debtor: User?,
+    @field:Json(name = "is_yours")
+    val isYours: Boolean?,
+    @field:Json(name = "description")
+    val description: String?,
     @field:Json(name = "created")
-    val created: String?
+    val created: String?,
+    @field:Json(name = "is_active")
+    val isActive: Boolean?
 )

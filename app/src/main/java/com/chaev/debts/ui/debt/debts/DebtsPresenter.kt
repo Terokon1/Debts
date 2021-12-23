@@ -2,7 +2,7 @@ package com.chaev.debts.ui.debt.debts
 
 import android.util.Log
 import com.chaev.debts.Screens
-import com.chaev.debts.domain.models.Debt
+import com.chaev.debts.domain.models.debt.Debt
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.utils.Left
@@ -32,6 +32,7 @@ class DebtsPresenter(
 
     fun attachView(fragment: DebtsFragment) {
         view = fragment
+        view?.fillRecycler(items)
     }
 
     fun detachView() {

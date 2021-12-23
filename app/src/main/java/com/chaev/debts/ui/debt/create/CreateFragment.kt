@@ -49,7 +49,6 @@ class CreateFragment : Fragment() {
             val debtor = binding.inputDebtor.text.toString()
             val money = binding.inputMoney.text.toString()
             val description = binding.inputDescription.text.toString()
-            presenter.postDebt(creditor, debtor, money, description)
         }
     }
 

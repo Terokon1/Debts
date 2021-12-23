@@ -2,15 +2,17 @@ package com.chaev.debts.domain.repositories
 
 import com.chaev.debts.data.api.ApiService
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
-import com.chaev.debts.data.models.debt.DebtRequest
+import com.chaev.debts.data.models.debt.DebtRequestPatch
+import com.chaev.debts.data.models.debt.DebtRequestResponse
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.tokens.RefreshRequest
 import com.chaev.debts.domain.mappers.*
-import com.chaev.debts.domain.models.Debt
+import com.chaev.debts.domain.models.debt.Debt
 import com.chaev.debts.domain.models.Friend
 import com.chaev.debts.domain.models.FriendRequest
 import com.chaev.debts.domain.models.Login
+import com.chaev.debts.domain.models.debt.DebtRequest
 import com.chaev.debts.utils.Either
 
 class DebtsApiRepository(private val api: ApiService) {
@@ -32,8 +34,12 @@ class DebtsApiRepository(private val api: ApiService) {
         DebtsMapper.multipleFromRaw(api.getDebts(accessToken))
     }
 
-    suspend fun postDebt(debt: DebtRequest): Either<Exception, Unit> = Either.of {
-        api.postDebtRequest(accessToken, debt)
+    suspend fun getDebtRequests(): Either<Exception, List<DebtRequest>> = Either.of {
+        api.getDebtRequests(accessToken).map { DebtRequestMapper.fromRaw(it) }
+    }
+
+    suspend fun patchDebtRequest(patch: DebtRequestPatch): Either<Exception, Unit> = Either.of {
+        api.patchDebtRequest(accessToken, patch)
     }
 
     suspend fun authorize(login: LoginRequest): Either<Exception, Login> = Either.of {

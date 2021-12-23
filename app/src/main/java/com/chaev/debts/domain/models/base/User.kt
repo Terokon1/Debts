@@ -1,4 +1,4 @@
-package com.chaev.debts.data.models.base
+package com.chaev.debts.domain.models.base
 
 import com.squareup.moshi.Json
 

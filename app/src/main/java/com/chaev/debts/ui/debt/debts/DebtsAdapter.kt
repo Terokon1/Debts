@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.chaev.debts.databinding.ItemDebtBinding
-import com.chaev.debts.domain.models.Debt
+import com.chaev.debts.domain.models.debt.Debt
 
 class DebtsAdapter : RecyclerView.Adapter<DebtsAdapter.ViewHolder>() {
     var debts: List<Debt> = emptyList()

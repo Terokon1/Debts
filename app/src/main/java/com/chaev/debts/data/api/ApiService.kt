@@ -1,7 +1,8 @@
 package com.chaev.debts.data.api
 
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
-import com.chaev.debts.data.models.debt.DebtRequest
+import com.chaev.debts.data.models.debt.DebtRequestPatch
+import com.chaev.debts.data.models.debt.DebtRequestResponse
 import com.chaev.debts.data.models.debt.DebtResponse
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.data.models.friendRequest.FriendReqResponse
@@ -10,6 +11,7 @@ import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.login.LoginResponse
 import com.chaev.debts.data.models.tokens.AccessResponse
 import com.chaev.debts.data.models.tokens.RefreshRequest
+import com.chaev.debts.domain.models.debt.DebtRequest
 import retrofit2.http.*
 
 interface ApiService {
@@ -25,13 +27,19 @@ interface ApiService {
         accessToken: String
     ): List<DebtResponse>
 
-    @POST("/debts/")
-    suspend fun postDebtRequest(
+    @GET("/debts/requests/")
+    suspend fun getDebtRequests(
+        @Header("Authorization")
+        accessToken: String
+    ): List<DebtRequestResponse>
+
+    @PATCH("/debts/requests/")
+    suspend fun patchDebtRequest(
         @Header("Authorization")
         accessToken: String,
         @Body
-        debt: DebtRequest
-    ): DebtResponse
+        patch: DebtRequestPatch
+    )
 
     @GET("/accounts/friends/")
     suspend fun getFriends(

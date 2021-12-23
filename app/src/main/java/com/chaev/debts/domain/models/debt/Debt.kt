@@ -1,6 +1,6 @@
-package com.chaev.debts.domain.models
+package com.chaev.debts.domain.models.debt
 
-import com.chaev.debts.data.models.base.User
+import com.chaev.debts.domain.models.base.User
 
 data class Debt(
     val id: String,

@@ -6,4 +6,6 @@
     <string name="input_description">Input description</string>
     <string name="input_username">Input username</string>
     <string name="input_password">Input password</string>
+    <string name="pending_request">Pending request to %1$s</string>
+    <string name="incoming_request">Incoming request from %1$s</string>
 </resources>
