@@ -33,7 +33,7 @@ class DebtsApiRepository(private val api: ApiService) {
     }
 
     suspend fun postDebt(debt: DebtRequest): Either<Exception, Unit> = Either.of {
-        api.postDebt(accessToken, debt)
+        api.postDebtRequest(accessToken, debt)
     }
 
     suspend fun authorize(login: LoginRequest): Either<Exception, Login> = Either.of {

@@ -1,7 +1,9 @@
 package com.chaev.debts.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
@@ -12,8 +14,10 @@ import com.chaev.debts.R
 import com.chaev.debts.Screens
 import com.chaev.debts.databinding.ActivityMainBinding
 import com.chaev.debts.domain.cicerone.CiceroneHolder
+import com.chaev.debts.ui.base.IBackNavigable
 import com.chaev.debts.ui.base.IFragmentHolder
 import com.chaev.debts.ui.meeting.login.LoginFragment
+import com.chaev.debts.utils.hideKeyboard
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.android.ext.android.inject
 
@@ -45,7 +49,7 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
         binding.navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.item1 -> {
-                    cicerone.router.replaceScreen(Screens.Debts())
+                    cicerone.router.replaceScreen(Screens.DebtsPager())
                     true
                 }
                 R.id.item2 -> {
@@ -85,6 +89,15 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
         binding.drawerLayout.setDrawerLockMode(if (fragment is LoginFragment) LOCK_MODE_LOCKED_CLOSED else LOCK_MODE_UNLOCKED)
         binding.barLayout.visibility =
             if (fragment is LoginFragment) View.INVISIBLE else View.VISIBLE
+        this.currentFocus?.hideKeyboard()
+    }
 
+    override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+        if (currentFragment is IBackNavigable) {
+            if (!currentFragment.onBackPressed()) {
+                super.onBackPressed()
+            }
+        }
     }
 }

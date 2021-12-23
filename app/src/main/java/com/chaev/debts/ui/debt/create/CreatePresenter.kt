@@ -1,7 +1,6 @@
-package com.chaev.debts.ui.create
+package com.chaev.debts.ui.debt.create
 
 import com.chaev.debts.data.models.debt.DebtRequest
-import com.chaev.debts.domain.mappers.MappingException
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.utils.Left
 import com.chaev.debts.utils.Right
@@ -42,7 +41,7 @@ class CreatePresenter(
 
             }
         } else {
-            throw Exception("Failed to post debt")
+            throw Exception("Failed to create")
         }
     }
 }

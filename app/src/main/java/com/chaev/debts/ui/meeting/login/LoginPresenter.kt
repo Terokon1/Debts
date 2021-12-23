@@ -26,7 +26,7 @@ class LoginPresenter(
     }
 
     private fun navigateSuccessLogin() {
-        router.replaceScreen(Screens.Debts())
+        router.replaceScreen(Screens.DebtsPager())
     }
 
     fun onLoginClicked(username: String, password: String) {

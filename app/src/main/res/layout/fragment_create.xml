@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/inputDebtor"
+        android:id="@+id/input_debtor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -14,8 +14,36 @@
         android:autofillHints="string"
         android:hint="@string/input_debtor"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/username1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_view"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="username1" />
+
+
+    <TextView
+        android:id="@+id/username2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="48dp"
+        android:textSize="20sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/arrow_view"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="username2" />
 
     <EditText
         android:id="@+id/inputCreditor"
@@ -26,17 +54,19 @@
         android:autofillHints="string"
         android:hint="@string/input_creditor"
         android:inputType="text"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/arrow_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:text="->"
         android:textSize="32sp"
-        app:layout_constraintEnd_toStartOf="@id/inputDebtor"
-        app:layout_constraintStart_toEndOf="@id/inputCreditor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -47,9 +77,10 @@
         android:autofillHints="string"
         android:hint="@string/input_money"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputCreditor" />
+        app:layout_constraintTop_toBottomOf="@+id/arrow_view" />
 
     <EditText
         android:id="@+id/inputDescription"
@@ -59,6 +90,7 @@
         android:autofillHints="string"
         android:hint="@string/input_description"
         android:inputType="text"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/inputMoney" />
@@ -67,10 +99,10 @@
         android:id="@+id/createDebtButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
         android:text="Create"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

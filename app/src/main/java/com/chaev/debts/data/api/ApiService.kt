@@ -26,7 +26,7 @@ interface ApiService {
     ): List<DebtResponse>
 
     @POST("/debts/")
-    suspend fun postDebt(
+    suspend fun postDebtRequest(
         @Header("Authorization")
         accessToken: String,
         @Body
