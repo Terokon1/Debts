@@ -16,6 +16,7 @@ import com.chaev.debts.databinding.ActivityMainBinding
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.ui.base.IBackNavigable
 import com.chaev.debts.ui.base.IFragmentHolder
+import com.chaev.debts.ui.base.INavigationDisabled
 import com.chaev.debts.ui.meeting.login.LoginFragment
 import com.chaev.debts.utils.hideKeyboard
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -86,9 +87,9 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
     }
 
     private fun onFragmentChanged(fragment: Fragment) {
-        binding.drawerLayout.setDrawerLockMode(if (fragment is LoginFragment) LOCK_MODE_LOCKED_CLOSED else LOCK_MODE_UNLOCKED)
+        binding.drawerLayout.setDrawerLockMode(if (fragment is INavigationDisabled) LOCK_MODE_LOCKED_CLOSED else LOCK_MODE_UNLOCKED)
         binding.barLayout.visibility =
-            if (fragment is LoginFragment) View.INVISIBLE else View.VISIBLE
+            if (fragment is INavigationDisabled) View.INVISIBLE else View.VISIBLE
         this.currentFocus?.hideKeyboard()
     }
 

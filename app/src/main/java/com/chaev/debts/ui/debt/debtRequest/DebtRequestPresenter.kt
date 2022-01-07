@@ -1,6 +1,7 @@
 package com.chaev.debts.ui.debt.debtRequest
 
 import android.util.Log
+import com.chaev.debts.Screens
 import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.data.models.debt.DebtRequestPatch
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
@@ -9,6 +10,7 @@ import com.chaev.debts.domain.models.debt.DebtRequest
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.utils.Left
 import com.chaev.debts.utils.Right
+import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,7 +19,8 @@ import retrofit2.HttpException
 
 class DebtRequestPresenter(
     private val debtsApiRepository: DebtsApiRepository,
-    private val handler: HttpExceptionHandler
+    private val handler: HttpExceptionHandler,
+    private val router: Router
 ) {
     private var view: DebtRequestFragment? = null
     private val scope = CoroutineScope(Dispatchers.IO)
@@ -26,7 +29,7 @@ class DebtRequestPresenter(
     init {
         scope.launch {
             items = getDebtRequests()
-           withContext(Dispatchers.Main) { view?.updateRecycler(items) }
+            withContext(Dispatchers.Main) { view?.updateRecycler(items) }
         }
     }
 
@@ -38,6 +41,10 @@ class DebtRequestPresenter(
 
     fun detachView() {
         view = null
+    }
+
+    fun navigateCreate() {
+        router.navigateTo(Screens.Create())
     }
 
     private suspend fun getDebtRequests(): List<DebtRequest> =

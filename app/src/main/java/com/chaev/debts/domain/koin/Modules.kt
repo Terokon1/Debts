@@ -31,7 +31,13 @@ val appModule = module {
     factory { CreatePresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
     factory { FriendRequestPresenter(get<DebtsApiRepository>()) }
     factory { AddFriendPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
-    factory { DebtRequestPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
+    factory {
+        DebtRequestPresenter(
+            get<DebtsApiRepository>(),
+            get<HttpExceptionHandler>(),
+            get<CiceroneHolder>().router
+        )
+    }
     single { DebtsApiRepository(RetrofitBuilder.apiService) }
     single { CiceroneHolder() }
     single { HttpExceptionHandler(get<DebtsApiRepository>(), get<CiceroneHolder>().router) }

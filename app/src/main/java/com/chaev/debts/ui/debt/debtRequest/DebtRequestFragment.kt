@@ -33,6 +33,7 @@ class DebtRequestFragment : BaseFragment() {
         presenter.attachView(this)
         binding.debtRequestsList.layoutManager = LinearLayoutManager(context)
         binding.debtRequestsList.adapter = adapter
+        binding.addButton.setOnClickListener { presenter.navigateCreate() }
     }
 
     override fun onDestroyView() {

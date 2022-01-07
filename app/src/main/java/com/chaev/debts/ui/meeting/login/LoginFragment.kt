@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.chaev.debts.databinding.FragmentLoginBinding
 import com.chaev.debts.ui.base.BaseFragment
+import com.chaev.debts.ui.base.INavigationDisabled
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 
-class LoginFragment : BaseFragment() {
+class LoginFragment : BaseFragment(), INavigationDisabled {
     private lateinit var binding: FragmentLoginBinding
     private val presenter: LoginPresenter by inject()
 

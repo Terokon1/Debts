@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.chaev.debts.databinding.FragmentAddFriendBinding
 import com.chaev.debts.ui.base.BaseFragment
+import com.chaev.debts.ui.base.INavigationDisabled
 import org.koin.android.ext.android.inject
 
-class AddFriendFragment : BaseFragment() {
+class AddFriendFragment : BaseFragment(), INavigationDisabled {
     private lateinit var binding: FragmentAddFriendBinding
     private val presenter: AddFriendPresenter by inject()
     override fun onCreateView(
