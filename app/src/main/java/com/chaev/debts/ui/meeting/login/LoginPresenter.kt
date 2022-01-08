@@ -1,11 +1,10 @@
 package com.chaev.debts.ui.meeting.login
 
+import android.content.SharedPreferences
 import com.chaev.debts.Screens
 import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.domain.repositories.DebtsApiRepository
-import com.chaev.debts.utils.Left
-import com.chaev.debts.utils.Right
-import com.chaev.debts.utils.USERNAME
+import com.chaev.debts.utils.*
 import com.github.terrakok.cicerone.Router
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,18 +28,45 @@ class LoginPresenter(
         router.replaceScreen(Screens.DebtsPager())
     }
 
-    fun onLoginClicked(username: String, password: String) {
+
+    fun onLoginClicked(username: String, password: String, prefs: SharedPreferences) {
         if (username.isNotEmpty() && password.isNotEmpty()) {
             scope.launch {
                 when (val r = debtsApiRepository.authorize(LoginRequest(username, password))) {
                     is Left -> view?.showAuthorizeError()
                     is Right -> {
                         debtsApiRepository.setupTokens(r.value.accessToken, r.value.refreshToken)
+                        prefs.edit().apply {
+                            putString(REFRESH_TOKEN_KEY, r.value.refreshToken)
+                            apply()
+                        }
                         USERNAME = username
                         navigateSuccessLogin()
                     }
                 }
             }
+        }
+    }
+
+    fun checkAuthorization(prefs: SharedPreferences) {
+        scope.launch {
+            prefs.getString(REFRESH_TOKEN_KEY, "")
+                ?.let {
+                    when (val r =
+                        debtsApiRepository.verifyToken(it)
+                    ) {
+                        is Right -> {
+                            debtsApiRepository.refreshToken = it
+                            navigateSuccessLogin()
+                        }
+                        is Left -> {
+                            prefs.edit().apply {
+                                putString(REFRESH_TOKEN_KEY, "")
+                                apply()
+                            }
+                        }
+                    }
+                }
         }
     }
 }

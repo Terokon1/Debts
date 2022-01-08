@@ -18,6 +18,8 @@ import com.chaev.debts.ui.base.IBackNavigable
 import com.chaev.debts.ui.base.IFragmentHolder
 import com.chaev.debts.ui.base.INavigationDisabled
 import com.chaev.debts.ui.meeting.login.LoginFragment
+import com.chaev.debts.utils.REFRESH_TOKEN_KEY
+import com.chaev.debts.utils.TOKENS_KEY
 import com.chaev.debts.utils.hideKeyboard
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import org.koin.android.ext.android.inject
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                 onFragmentChanged(it)
             }
         }
+        val prefs =
+            this.getSharedPreferences(TOKENS_KEY, Context.MODE_PRIVATE)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -61,6 +65,9 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                     binding.barLayout.visibility = View.INVISIBLE
                     binding.drawerLayout.closeDrawer(GravityCompat.START, true)
                     binding.drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+                    prefs.edit().apply {
+                        putString(REFRESH_TOKEN_KEY, "")
+                    }
                     cicerone.router.replaceScreen(Screens.Login())
                     true
                 }
@@ -99,6 +106,8 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
             if (!currentFragment.onBackPressed()) {
                 super.onBackPressed()
             }
+        } else {
+            super.onBackPressed()
         }
     }
 }

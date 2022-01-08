@@ -11,6 +11,7 @@ import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.login.LoginResponse
 import com.chaev.debts.data.models.tokens.AccessResponse
 import com.chaev.debts.data.models.tokens.RefreshRequest
+import com.chaev.debts.data.models.tokens.TokenRequest
 import com.chaev.debts.domain.models.debt.DebtRequest
 import retrofit2.http.*
 
@@ -59,6 +60,12 @@ interface ApiService {
         accessToken: String,
         @Body
         patch: FriendReqPatch
+    )
+
+    @POST("/accounts/token/verify/")
+    suspend fun verifyToken(
+        @Body
+        refreshToken: TokenRequest
     )
 
     @POST("accounts/friend-requests/")

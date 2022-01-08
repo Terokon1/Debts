@@ -32,7 +32,8 @@
                 android:background="@android:color/transparent"
                 android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_menu_24"
-                app:title="Debts" app:menu="@menu/navigation_drawer"/>
+                app:title="Debts" app:menu="@menu/navigation_drawer"
+                />
 
         </com.google.android.material.appbar.AppBarLayout>
 

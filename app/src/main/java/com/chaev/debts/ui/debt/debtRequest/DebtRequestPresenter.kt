@@ -77,9 +77,7 @@ class DebtRequestPresenter(
                         }
                         else -> view?.showPatchError()
                     }
-
                 }
-
             }
         }
     }

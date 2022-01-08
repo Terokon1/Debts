@@ -3,10 +3,10 @@ package com.chaev.debts.domain.repositories
 import com.chaev.debts.data.api.ApiService
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequestPatch
-import com.chaev.debts.data.models.debt.DebtRequestResponse
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.tokens.RefreshRequest
+import com.chaev.debts.data.models.tokens.TokenRequest
 import com.chaev.debts.domain.mappers.*
 import com.chaev.debts.domain.models.debt.Debt
 import com.chaev.debts.domain.models.Friend
@@ -60,5 +60,9 @@ class DebtsApiRepository(private val api: ApiService) {
 
     suspend fun postFriendRequest(username: String): Either<Exception, Unit> = Either.of {
         api.postFriendRequest(accessToken, AddFriendRequest(username))
+    }
+
+    suspend fun verifyToken(refreshToken: String): Either<Exception, Unit> = Either.of {
+        api.verifyToken(TokenRequest(refreshToken) )
     }
 }

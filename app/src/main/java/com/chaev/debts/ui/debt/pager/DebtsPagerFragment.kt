@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.chaev.debts.databinding.FragmentDebtsPagerBinding
 import com.chaev.debts.ui.base.BaseFragment
 import com.chaev.debts.ui.base.IBackNavigable
+import com.google.android.material.tabs.TabLayoutMediator
 
 class DebtsPagerFragment : BaseFragment(), IBackNavigable {
     lateinit var binding: FragmentDebtsPagerBinding
@@ -22,7 +23,12 @@ class DebtsPagerFragment : BaseFragment(), IBackNavigable {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.viewPager.adapter = DebtsPagerAdapter(this)
-
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "List"
+                1 -> tab.text = "Requests"
+            }
+        }.attach()
     }
 
     override fun onBackPressed(): Boolean =
@@ -32,5 +38,4 @@ class DebtsPagerFragment : BaseFragment(), IBackNavigable {
             binding.viewPager.currentItem = binding.viewPager.currentItem - 1
             true
         }
-
 }
