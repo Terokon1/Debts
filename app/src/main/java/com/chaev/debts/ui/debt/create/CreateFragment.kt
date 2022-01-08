@@ -52,10 +52,6 @@ class CreateFragment : Fragment(), INavigationDisabled {
         }
     }
 
-    fun fillSpinner(items: List<String>, adapter: ArrayAdapter<String>) {
-        adapter.addAll(items)
-        adapter.notifyDataSetChanged()
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

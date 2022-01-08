@@ -13,7 +13,8 @@
         android:background="@color/purple_500"
         app:tabIndicatorColor="@color/design_default_color_background"
         app:tabTextColor="@color/design_default_color_background"
-        tools:ignore="SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck"
+        android:elevation="4dp" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/view_pager"

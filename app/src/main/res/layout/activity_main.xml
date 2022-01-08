@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="10dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"
@@ -30,14 +31,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
-                android:elevation="0dp"
                 app:navigationIcon="@drawable/ic_menu_24"
+                android:elevation="0dp"
                 app:title="Debts" app:menu="@menu/navigation_drawer"
                 />
 
         </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
+            android:elevation="10dp"
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -79,7 +79,6 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
     override fun onResumeFragments() {
         super.onResumeFragments()
         navigatorHolder.setNavigator(navigator)
-
         val currentFragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
         currentFragment?.let { onFragmentChanged(it) }
     }
