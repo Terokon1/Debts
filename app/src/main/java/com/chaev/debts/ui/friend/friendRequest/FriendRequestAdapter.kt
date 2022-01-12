@@ -33,6 +33,7 @@ class FriendRequestAdapter(
                     RequestStatus.Decline
                 )
             }
+
         }
     }
 

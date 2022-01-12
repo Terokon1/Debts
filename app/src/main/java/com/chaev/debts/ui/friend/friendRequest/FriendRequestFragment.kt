@@ -2,10 +2,12 @@ package com.chaev.debts.ui.friend.friendRequest
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.chaev.debts.databinding.FragmentFriendRequestBinding
 import com.chaev.debts.domain.models.FriendRequest
 import com.chaev.debts.ui.base.BaseFragment
@@ -52,4 +54,6 @@ class FriendRequestFragment : BaseFragment() {
         adapter.requests = requests
         adapter.notifyDataSetChanged()
     }
+
+
 }

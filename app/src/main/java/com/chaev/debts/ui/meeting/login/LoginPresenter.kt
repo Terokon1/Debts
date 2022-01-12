@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 
 class LoginPresenter(
     private val router: Router,
-    private val debtsApiRepository: DebtsApiRepository
+    private val debtsApiRepository: DebtsApiRepository,
+    private val prefs: SharedPreferences
 ) {
     private val scope = CoroutineScope(Dispatchers.IO)
     private var view: LoginFragment? = null
@@ -28,8 +29,7 @@ class LoginPresenter(
         router.replaceScreen(Screens.DebtsPager())
     }
 
-
-    fun onLoginClicked(username: String, password: String, prefs: SharedPreferences) {
+    fun onLoginClicked(username: String, password: String) {
         if (username.isNotEmpty() && password.isNotEmpty()) {
             scope.launch {
                 when (val r = debtsApiRepository.authorize(LoginRequest(username, password))) {
@@ -37,10 +37,10 @@ class LoginPresenter(
                     is Right -> {
                         debtsApiRepository.setupTokens(r.value.accessToken, r.value.refreshToken)
                         prefs.edit().apply {
-                            putString(REFRESH_TOKEN_KEY, r.value.refreshToken)
+                            putString(AppConsts.REFRESH_TOKEN_KEY, r.value.refreshToken)
                             apply()
                         }
-                        USERNAME = username
+                        AppConsts.USERNAME = username
                         navigateSuccessLogin()
                     }
                 }
@@ -48,25 +48,4 @@ class LoginPresenter(
         }
     }
 
-    fun checkAuthorization(prefs: SharedPreferences) {
-        scope.launch {
-            prefs.getString(REFRESH_TOKEN_KEY, "")
-                ?.let {
-                    when (val r =
-                        debtsApiRepository.verifyToken(it)
-                    ) {
-                        is Right -> {
-                            debtsApiRepository.refreshToken = it
-                            navigateSuccessLogin()
-                        }
-                        is Left -> {
-                            prefs.edit().apply {
-                                putString(REFRESH_TOKEN_KEY, "")
-                                apply()
-                            }
-                        }
-                    }
-                }
-        }
-    }
 }

@@ -1,5 +1,7 @@
 package com.chaev.debts.domain.koin
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.chaev.debts.data.api.RetrofitBuilder
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.domain.repositories.DebtsApiRepository
@@ -11,13 +13,16 @@ import com.chaev.debts.ui.debt.debts.DebtsPresenter
 import com.chaev.debts.ui.friend.friendRequest.FriendRequestPresenter
 import com.chaev.debts.ui.friend.friends.FriendsPresenter
 import com.chaev.debts.ui.meeting.login.LoginPresenter
+import com.chaev.debts.utils.AppConsts
+import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
 
 val appModule = module {
     factory<FriendsPresenter> {
         FriendsPresenter(
             get<CiceroneHolder>().router,
-            get<DebtsApiRepository>()
+            get<DebtsApiRepository>(),
+            get<HttpExceptionHandler>()
         )
     }
     factory<DebtsPresenter> {
@@ -27,10 +32,16 @@ val appModule = module {
             get<HttpExceptionHandler>()
         )
     }
-    factory { LoginPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
+    factory {
+        LoginPresenter(
+            get<CiceroneHolder>().router,
+            get<DebtsApiRepository>(),
+            get<SharedPreferences>()
+        )
+    }
     factory { CreatePresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
-    factory { FriendRequestPresenter(get<DebtsApiRepository>()) }
-    factory { AddFriendPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
+    factory { FriendRequestPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
+    factory { AddFriendPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
     factory {
         DebtRequestPresenter(
             get<DebtsApiRepository>(),
@@ -38,7 +49,14 @@ val appModule = module {
             get<CiceroneHolder>().router
         )
     }
-    single { DebtsApiRepository(RetrofitBuilder.apiService) }
+    single {
+        androidApplication().applicationContext.getSharedPreferences(
+            AppConsts.TOKENS_KEY,
+            Context.MODE_PRIVATE
+        )
+    }
+    single { DebtsApiRepository(RetrofitBuilder.apiService, get<SharedPreferences>()) }
     single { CiceroneHolder() }
     single { HttpExceptionHandler(get<DebtsApiRepository>(), get<CiceroneHolder>().router) }
+
 }

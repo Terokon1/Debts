@@ -1,5 +1,7 @@
 package com.chaev.debts.domain.repositories
 
+import android.content.SharedPreferences
+import android.util.Log
 import com.chaev.debts.data.api.ApiService
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequestPatch
@@ -13,21 +15,25 @@ import com.chaev.debts.domain.models.Friend
 import com.chaev.debts.domain.models.FriendRequest
 import com.chaev.debts.domain.models.Login
 import com.chaev.debts.domain.models.debt.DebtRequest
+import com.chaev.debts.utils.AppConsts
 import com.chaev.debts.utils.Either
 
-class DebtsApiRepository(private val api: ApiService) {
+class DebtsApiRepository(private val api: ApiService, private val prefs: SharedPreferences) {
     var accessToken: String = ""
     var refreshToken: String = ""
 
     fun setupTokens(access: String, refresh: String) {
         accessToken = "Bearer $access"
         refreshToken = refresh
+        prefs.edit().apply{
+            putString(AppConsts.REFRESH_TOKEN_KEY, refresh)
+            apply()
+        }
     }
 
     suspend fun updateAccessToken(token: String) = Either.of {
         val tokens = TokensMapper.fromRaw(api.getNewTokens(RefreshRequest(token)))
-        accessToken = "Bearer ${tokens.access}"
-        refreshToken = tokens.refresh
+        setupTokens(tokens.access, tokens.refresh)
     }
 
     suspend fun getDebts(): Either<Exception, List<Debt>> = Either.of {
@@ -63,6 +69,6 @@ class DebtsApiRepository(private val api: ApiService) {
     }
 
     suspend fun verifyToken(refreshToken: String): Either<Exception, Unit> = Either.of {
-        api.verifyToken(TokenRequest(refreshToken) )
+        api.verifyToken(TokenRequest(refreshToken))
     }
 }

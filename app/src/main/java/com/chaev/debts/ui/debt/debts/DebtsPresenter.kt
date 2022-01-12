@@ -39,21 +39,24 @@ class DebtsPresenter(
         view = null
     }
 
-    private suspend fun getDebts(): List<Debt> =
-        when (val r = debtsApiRepository.getDebts()) {
+    private suspend fun getDebts(): List<Debt> {
+        return when (val r = handler.runWithAuthRetry( debtsApiRepository::getDebts)) {
             is Right -> {
                 Log.d("Debug", "${r.value}")
                 r.value
             }
-            is Left -> when (val e = r.value) {
-                is HttpException -> if (handler.handle(e)) {
-                    getDebts()
-                } else {
-                    emptyList()
+            is Left ->
+                when (val e = r.value) {
+                    is HttpException -> if (handler.handle(e)) {
+                        getDebts()
+                    } else {
+                        emptyList()
+                    }
+                    else -> emptyList()
                 }
-                else -> emptyList()
-            }
         }
+    }
+
 
 
     fun onCreateClicked() {

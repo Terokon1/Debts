@@ -2,6 +2,7 @@ package com.chaev.debts.ui.friend.friends
 
 import android.util.Log
 import com.chaev.debts.Screens
+import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.domain.models.Friend
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.utils.Left
@@ -14,7 +15,8 @@ import kotlinx.coroutines.withContext
 
 class FriendsPresenter(
     private val router: Router,
-    private val debtsApiRepository: DebtsApiRepository
+    private val debtsApiRepository: DebtsApiRepository,
+    private val handler: HttpExceptionHandler
 ) {
     private val scope = CoroutineScope(Dispatchers.IO)
     private var view: FriendsFragment? = null
@@ -46,7 +48,7 @@ class FriendsPresenter(
     }
 
     private suspend fun getFriends(): List<Friend> =
-        when (val r = debtsApiRepository.getFriends()) {
+        when (val r = handler.runWithAuthRetry(debtsApiRepository::getFriends)) {
             is Right -> {
                 Log.d("Debug", "${r.value}")
                 r.value
