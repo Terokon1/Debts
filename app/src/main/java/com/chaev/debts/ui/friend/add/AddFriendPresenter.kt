@@ -27,7 +27,7 @@ class AddFriendPresenter(private val router: Router, private val repository: Deb
 
     fun addFriendClicked(username: String) {
         scope.launch {
-            when (val r = repository.postFriendRequest(username)) {
+            when (val r = handler.runWithAuthRetryArgs(repository::postFriendRequest,username)) {
                 is Right -> {
                     navigateBack()
                 }
