@@ -8,6 +8,7 @@ import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.ui.friend.add.AddFriendPresenter
 import com.chaev.debts.ui.debt.create.CreatePresenter
+import com.chaev.debts.ui.debt.create.bottomSheet.BottomSheetPresenter
 import com.chaev.debts.ui.debt.debtRequest.DebtRequestPresenter
 import com.chaev.debts.ui.debt.debts.DebtsPresenter
 import com.chaev.debts.ui.friend.friendRequest.FriendRequestPresenter
@@ -41,7 +42,13 @@ val appModule = module {
     }
     factory { CreatePresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
     factory { FriendRequestPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
-    factory { AddFriendPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
+    factory {
+        AddFriendPresenter(
+            get<CiceroneHolder>().router,
+            get<DebtsApiRepository>(),
+            get<HttpExceptionHandler>()
+        )
+    }
     factory {
         DebtRequestPresenter(
             get<DebtsApiRepository>(),
@@ -49,6 +56,7 @@ val appModule = module {
             get<CiceroneHolder>().router
         )
     }
+    factory { BottomSheetPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
     single {
         androidApplication().applicationContext.getSharedPreferences(
             AppConsts.TOKENS_KEY,

@@ -14,6 +14,7 @@
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_debts_pager.xml" value="0.25" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_friend_request.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_friends.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_friends_sheet.xml" value="0.35280797101449274" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/friend_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/header_navigation_drawer.xml" value="0.36666666666666664" />
@@ -21,6 +22,7 @@
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_debt_request.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_friend.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_friend_request.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/item_friends_bottom_sheet.xml" value="0.35280797101449274" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/layout/sdfg.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/1/AndroidStudioProjects/Debts/app/src/main/res/menu/navigation_drawer.xml" value="0.36666666666666664" />
       </map>

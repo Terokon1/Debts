@@ -18,6 +18,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="username1" />
 
+    <Button
+        android:id="@+id/chooseButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="choose creditor"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_view"
+        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/username2"
@@ -31,6 +43,16 @@
         app:layout_constraintStart_toEndOf="@+id/arrow_view"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="username2" />
+
+    <Button
+        android:id="@+id/chooseButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="choose debtor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/arrow_view"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView

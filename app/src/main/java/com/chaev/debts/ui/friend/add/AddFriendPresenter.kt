@@ -10,7 +10,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class AddFriendPresenter(private val router: Router, private val repository: DebtsApiRepository, private val handler: HttpExceptionHandler) {
+class AddFriendPresenter(
+    private val router: Router,
+    private val repository: DebtsApiRepository,
+    private val handler: HttpExceptionHandler
+) {
     private val scope = CoroutineScope(Dispatchers.IO)
     private var view: AddFriendFragment? = null
     fun onAttach(fragment: AddFriendFragment) {
@@ -27,7 +31,7 @@ class AddFriendPresenter(private val router: Router, private val repository: Deb
 
     fun addFriendClicked(username: String) {
         scope.launch {
-            when (val r = handler.runWithAuthRetryArgs(repository::postFriendRequest,username)) {
+            when (val r = handler.runWithAuthRetryArgs(repository::postFriendRequest, username)) {
                 is Right -> {
                     navigateBack()
                 }

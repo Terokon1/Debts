@@ -2,6 +2,7 @@ package com.chaev.debts.data.api
 
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequestPatch
+import com.chaev.debts.data.models.debt.DebtRequestRequest
 import com.chaev.debts.data.models.debt.DebtRequestResponse
 import com.chaev.debts.data.models.debt.DebtResponse
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
@@ -54,7 +55,7 @@ interface ApiService {
         accessToken: String
     ): List<FriendReqResponse>
 
-    @PATCH("accounts/friend-requests/")
+    @PATCH("/accounts/friend-requests/")
     suspend fun patchFriendRequest(
         @Header("Authorization")
         accessToken: String,
@@ -68,11 +69,19 @@ interface ApiService {
         refreshToken: TokenRequest
     )
 
-    @POST("accounts/friend-requests/")
+    @POST("/accounts/friend-requests/")
     suspend fun postFriendRequest(
         @Header("Authorization")
         accessToken: String,
         @Body
         username: AddFriendRequest
+    )
+
+    @POST("/debts/requests/")
+    suspend fun postDebtRequest(
+        @Header("Authorization")
+        accessToken: String,
+        @Body
+        debtRequest: DebtRequestRequest
     )
 }

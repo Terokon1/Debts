@@ -57,7 +57,6 @@ class DebtRequestAdapter(private val onResponseClicked: (id: String, status: Req
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemDebtRequestBinding.inflate(inflater, parent, false)
