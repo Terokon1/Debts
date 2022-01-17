@@ -7,19 +7,18 @@
 
 
     <TextView
-        android:id="@+id/username1"
+        android:id="@+id/creditors_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/arrow_view"
-        app:layout_constraintHorizontal_bias="0.565"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="username1" />
 
     <Button
-        android:id="@+id/chooseButton1"
+        android:id="@+id/choose_creditor_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -32,20 +31,20 @@
 
 
     <TextView
-        android:id="@+id/username2"
+        android:id="@+id/debtors_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="48dp"
         android:textSize="20sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/arrow_view"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="username2" />
+        tools:text="username2"
+        tools:visibility="visible" />
 
     <Button
-        android:id="@+id/chooseButton2"
+        android:id="@+id/choose_debtor_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -71,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:autofillHints="string"
+        android:autofillHints="money"
         android:hint="@string/input_money"
         android:inputType="text"
         android:minHeight="48dp"

@@ -22,8 +22,8 @@ class CreateFragment : BaseFragment(), INavigationDisabled {
     private lateinit var binding: FragmentCreateBinding
     private val presenter: CreatePresenter by inject()
     private val prefs: SharedPreferences by inject()
-    var creditorMode = true
-
+    private var creditorMode = true
+    private var isSelected = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,33 +37,42 @@ class CreateFragment : BaseFragment(), INavigationDisabled {
         super.onViewCreated(view, savedInstanceState)
         val bottomSheet = FriendsBottomSheet()
         presenter.attachView(this)
-        binding.username1.text = prefs.getString(AppConsts.USERNAME_KEY, "")
+        binding.creditorsUsername.text = prefs.getString(AppConsts.USERNAME_KEY, "")
         binding.arrowView.setOnClickListener {
-            if (creditorMode) {
-                binding.arrowView.text = "<-"
-                binding.username1.visibility = View.GONE
-                binding.chooseButton1.visibility = View.VISIBLE
-                binding.username2.visibility = View.VISIBLE
-                binding.username2.text = prefs.getString(AppConsts.USERNAME_KEY, "")
-                binding.chooseButton2.visibility = View.GONE
-                creditorMode = false
+            if (!isSelected) {
+                if (creditorMode) {
+                    binding.creditorsUsername.visibility = View.GONE
+                    binding.chooseCreditorButton.visibility = View.VISIBLE
+                    binding.debtorsUsername.visibility = View.VISIBLE
+                    binding.debtorsUsername.text = prefs.getString(AppConsts.USERNAME_KEY, "")
+                    binding.chooseDebtorButton.visibility = View.GONE
+                    creditorMode = false
+                } else {
+                    binding.creditorsUsername.visibility = View.VISIBLE
+                    binding.creditorsUsername.text = prefs.getString(AppConsts.USERNAME_KEY, "")
+                    binding.chooseCreditorButton.visibility = View.GONE
+                    binding.debtorsUsername.visibility = View.GONE
+                    binding.chooseDebtorButton.visibility = View.VISIBLE
+                    creditorMode = true
+                }
             } else {
-                binding.arrowView.text = "->"
-                binding.username1.visibility = View.VISIBLE
-                binding.username1.text = prefs.getString(AppConsts.USERNAME_KEY, "")
-                binding.chooseButton1.visibility = View.GONE
-                binding.username2.visibility = View.GONE
-                binding.chooseButton2.visibility = View.VISIBLE
-                creditorMode = true
+                if (creditorMode) {
+                    binding.creditorsUsername.text = binding.debtorsUsername.text
+                    binding.debtorsUsername.text = prefs.getString(AppConsts.USERNAME_KEY, "")
+                    creditorMode = false
+                } else {
+                    binding.debtorsUsername.text = binding.creditorsUsername.text
+                    binding.creditorsUsername.text = prefs.getString(AppConsts.USERNAME_KEY, "")
+                    creditorMode = true
+                }
             }
-
         }
         binding.createDebtButton.setOnClickListener {
 
             val money = binding.inputMoney.text.toString()
             val description = binding.inputDescription.text.toString()
-            val creditorUsername = binding.username1.text.toString()
-            val debtorUsername = binding.username2.text.toString()
+            val creditorUsername = binding.creditorsUsername.text.toString()
+            val debtorUsername = binding.debtorsUsername.text.toString()
             if (creditorMode) {
                 if (money.isNotEmpty() && debtorUsername.isNotEmpty()) {
                     presenter.sendDebtRequest(money, description, creditorMode)
@@ -79,29 +88,43 @@ class CreateFragment : BaseFragment(), INavigationDisabled {
             }
         }
 
-        binding.chooseButton1.setOnClickListener {
+        binding.chooseCreditorButton.setOnClickListener {
             bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
         }
-        binding.chooseButton2.setOnClickListener {
+        binding.chooseDebtorButton.setOnClickListener {
             bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
+        }
+        binding.creditorsUsername.setOnClickListener {
+            if (isSelected) {
+                if (!creditorMode) {
+                    bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
+                }
+            }
+        }
+        binding.debtorsUsername.setOnClickListener {
+            if (isSelected) {
+                if (creditorMode) {
+                    bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
+                }
+            }
         }
         var result: Friend
         childFragmentManager.setFragmentResultListener("requestKey", this) { requestKey, bundle ->
             result = bundle.getParcelable<Friend>(requestKey)!!
             if (creditorMode) {
-                binding.chooseButton2.visibility = View.GONE
-                binding.username2.visibility = View.VISIBLE
-                binding.username2.text = result.username
+                binding.chooseDebtorButton.visibility = View.GONE
+                binding.debtorsUsername.visibility = View.VISIBLE
+                binding.debtorsUsername.text = result.username
             } else {
-                binding.chooseButton1.visibility = View.GONE
-                binding.username1.visibility = View.VISIBLE
-                binding.username1.text = result.username
+                binding.chooseCreditorButton.visibility = View.GONE
+                binding.creditorsUsername.visibility = View.VISIBLE
+                binding.creditorsUsername.text = result.username
             }
             presenter.result = result
+            isSelected = true
             Log.d("zxc", result.username)
         }
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
