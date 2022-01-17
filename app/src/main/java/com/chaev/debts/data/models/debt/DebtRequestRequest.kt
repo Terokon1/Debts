@@ -1,7 +1,9 @@
 package com.chaev.debts.data.models.debt
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class DebtRequestRequest(
     @field:Json(name = "money")
     val money: String,

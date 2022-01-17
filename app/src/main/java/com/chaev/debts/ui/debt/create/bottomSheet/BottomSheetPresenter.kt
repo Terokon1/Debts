@@ -55,4 +55,8 @@ class BottomSheetPresenter(
             }
         }
 
+    fun selectFriend() {
+
+    }
+
 }

@@ -20,20 +20,19 @@ class FriendRequestAdapter(
     ) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(request: FriendRequest) {
-            binding.username.text = request.user.username
+            binding.username.text = request.fromUser.username
             binding.accept.setOnClickListener {
                 responseButtonsClickListener(
                     request.id,
-                    RequestStatus.Accept
+                    RequestStatus.accept
                 )
             }
             binding.decline.setOnClickListener {
                 responseButtonsClickListener(
                     request.id,
-                    RequestStatus.Decline
+                    RequestStatus.decline
                 )
             }
-
         }
     }
 

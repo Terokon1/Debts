@@ -50,15 +50,9 @@ class DebtRequestPresenter(
     private suspend fun getDebtRequests(): List<DebtRequest> =
         when (val r = handler.runWithAuthRetry(debtsApiRepository::getDebtRequests)) {
             is Right -> r.value
-            is Left -> when (val e = r.value) {
-                is HttpException -> if (handler.handle(e)) {
-                    getDebtRequests()
-                } else {
-                    emptyList()
-                }
-                else -> emptyList()
-            }
+            is Left -> emptyList()
         }
+
 
     fun onResponseClicked(id: String, status: RequestStatus) {
         scope.launch {
@@ -71,17 +65,14 @@ class DebtRequestPresenter(
                     withContext(Dispatchers.Main) { view?.updateRecycler(items) }
                 }
                 is Left -> {
-                    when (val e = r.value) {
-                        is HttpException -> if (handler.handle(e)) {
-                            onResponseClicked(id, status)
-                        } else {
-                            Log.d("Debug", "Failed to patch", r.value)
-                            view?.showPatchError()
-                        }
-                        else -> view?.showPatchError()
-                    }
+                    Log.d("Debug", "Failed to patch", r.value)
+                    view?.showPatchError()
                 }
+
             }
         }
     }
+
 }
+
+

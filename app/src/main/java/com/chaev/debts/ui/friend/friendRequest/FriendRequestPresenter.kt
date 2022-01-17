@@ -59,7 +59,7 @@ class FriendRequestPresenter(
     }
 
     private suspend fun getFriendRequests(): List<FriendRequest> =
-        when (val r = handler.runWithAuthRetry(debtsApiRepository::getFriendRequests)) {
+        when (val r = handler.runWithAuthRetry({ debtsApiRepository.getFriendRequests() })) {
             is Right -> {
                 Log.d("Debug", "${r.value}")
                 r.value

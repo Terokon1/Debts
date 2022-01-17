@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chaev.debts.databinding.FragmentFriendsSheetBinding
 import com.chaev.debts.domain.models.Friend
+import com.chaev.debts.ui.debt.create.CreateFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.android.ext.android.inject
 
@@ -29,6 +31,8 @@ class FriendsBottomSheet : BottomSheetDialogFragment() {
         binding.friendsList.layoutManager = LinearLayoutManager(context)
         binding.friendsList.adapter = adapter
         presenter.fillRecycler()
+        (targetFragment as? BottomSheetListener)?.onUserSelected("asd")
+
     }
 
     override fun onPause() {
@@ -43,5 +47,9 @@ class FriendsBottomSheet : BottomSheetDialogFragment() {
 
     companion object {
         const val TAG = "BottomSheet"
+        fun <T> newInstance(parent: T) where T : Fragment, T : BottomSheetListener =
+            FriendsBottomSheet().apply {
+                setTargetFragment(parent, 0)
+            }
     }
 }

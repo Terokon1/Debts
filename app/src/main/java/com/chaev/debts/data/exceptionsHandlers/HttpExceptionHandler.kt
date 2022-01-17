@@ -7,7 +7,9 @@ import com.chaev.debts.utils.Either
 import com.chaev.debts.utils.Left
 import com.chaev.debts.utils.Right
 import com.github.terrakok.cicerone.Router
+import kotlinx.coroutines.delay
 import retrofit2.HttpException
+import java.net.HttpURLConnection
 
 class HttpExceptionHandler(
     private val apiRepository: DebtsApiRepository,
@@ -34,30 +36,36 @@ class HttpExceptionHandler(
 
     suspend fun <T> runWithAuthRetry(
         action: suspend () -> Either<Exception, T>,
-        retries: Int = 4
+        retries: Int = 4,
+        delay: Int = 250
     ): Either<Exception, T> {
         var attempts = retries
         var isSuccessful = false
         return when (val r = action.invoke()) {
-            is Right -> {
-                r
-            }
             is Left ->
                 when (val e = r.value) {
                     is HttpException -> {
                         while (!isSuccessful && attempts > 0) {
+                            delay(delay.toLong())
                             isSuccessful = handle(e)
                             attempts -= 1
                         }
-                        if (isSuccessful) {
-                            action.invoke()
-                        } else {
-                            router.replaceScreen(Screens.Login())
-                            r
+                        when {
+                            isSuccessful -> {
+                                action.invoke()
+                            }
+                            e.code() == HttpURLConnection.HTTP_UNAUTHORIZED -> {
+                                router.replaceScreen(Screens.Login())
+                                r
+                            }
+                            else -> {
+                                r
+                            }
                         }
                     }
                     else -> r
                 }
+            else -> r
         }
     }
 
@@ -81,8 +89,10 @@ class HttpExceptionHandler(
                         }
                         if (isSuccessful) {
                             action.invoke(args)
-                        } else {
+                        } else if (e.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
                             router.replaceScreen(Screens.Login())
+                            r
+                        } else {
                             r
                         }
                     }

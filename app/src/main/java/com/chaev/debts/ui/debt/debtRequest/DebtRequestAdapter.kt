@@ -1,7 +1,6 @@
 package com.chaev.debts.ui.debt.debtRequest
 
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,13 +40,13 @@ class DebtRequestAdapter(private val onResponseClicked: (id: String, status: Req
                     binding.accept.setOnClickListener {
                         onResponseClicked(
                             item.id,
-                            RequestStatus.Accept
+                            RequestStatus.accept
                         )
                     }
                     binding.decline.setOnClickListener {
                         onResponseClicked(
                             item.id,
-                            RequestStatus.Decline
+                            RequestStatus.decline
                         )
                     }
                 }

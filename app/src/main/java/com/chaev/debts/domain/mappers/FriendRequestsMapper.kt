@@ -11,6 +11,7 @@ object FriendRequestsMapper {
 
     private fun fromRaw(r: FriendReqResponse) = FriendRequest(
         r.id ?: throw MappingException("id"),
-        r.user ?: throw MappingException("user")
+        r.fromUser ?: throw MappingException("user"),
+        r.toUser ?: throw MappingException("user")
     )
 }

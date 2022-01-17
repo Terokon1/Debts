@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
     private val navigatorHolder = cicerone.navigatorHolder
     private val navigator = AppNavigator(this, R.id.fragment_container, supportFragmentManager)
     private val scope = CoroutineScope(Dispatchers.IO)
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.chaev.debts.databinding.FragmentCreateBinding
+import com.chaev.debts.ui.base.BaseFragment
 import com.chaev.debts.ui.base.INavigationDisabled
+import com.chaev.debts.ui.debt.create.bottomSheet.BottomSheetListener
 import com.chaev.debts.ui.debt.create.bottomSheet.FriendsBottomSheet
 import org.koin.android.ext.android.inject
 
-class CreateFragment : Fragment(), INavigationDisabled {
+class CreateFragment : BaseFragment(), INavigationDisabled, BottomSheetListener {
     private lateinit var binding: FragmentCreateBinding
     private val presenter: CreatePresenter by inject()
     var creditorMode = true
@@ -62,6 +64,10 @@ class CreateFragment : Fragment(), INavigationDisabled {
     override fun onDestroyView() {
         super.onDestroyView()
         presenter.detachView()
+    }
+
+    override fun onUserSelected(username: String) {
+        TODO("Not yet implemented")
     }
 
 
