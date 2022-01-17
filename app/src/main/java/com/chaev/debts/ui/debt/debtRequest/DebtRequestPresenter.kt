@@ -56,10 +56,11 @@ class DebtRequestPresenter(
 
     fun onResponseClicked(id: String, status: RequestStatus) {
         scope.launch {
-            when (val r = handler.runWithAuthRetryArgs(
-                debtsApiRepository::patchDebtRequest,
-                DebtRequestPatch(id, status)
-            )) {
+            when (val r = handler.runWithAuthRetry({
+                debtsApiRepository.patchDebtRequest(
+                    DebtRequestPatch(id, status)
+                )
+            })) {
                 is Right -> {
                     items = items.filter { it.id != id }
                     withContext(Dispatchers.Main) { view?.updateRecycler(items) }

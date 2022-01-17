@@ -40,7 +40,7 @@ class DebtsPresenter(
     }
 
     private suspend fun getDebts(): List<Debt> {
-        return when (val r = handler.runWithAuthRetry( debtsApiRepository::getDebts)) {
+        return when (val r = handler.runWithAuthRetry({ debtsApiRepository.getDebts() })) {
             is Right -> {
                 Log.d("Debug", "${r.value}")
                 r.value
@@ -56,7 +56,6 @@ class DebtsPresenter(
                 }
         }
     }
-
 
 
     fun onCreateClicked() {

@@ -68,36 +68,4 @@ class HttpExceptionHandler(
             else -> r
         }
     }
-
-    suspend fun <T, A> runWithAuthRetryArgs(
-        action: suspend (A) -> Either<Exception, T>,
-        args: A,
-        retries: Int = 4
-    ): Either<Exception, T> {
-        var attempts = retries
-        var isSuccessful = false
-        return when (val r = action.invoke(args)) {
-            is Right -> {
-                r
-            }
-            is Left ->
-                when (val e = r.value) {
-                    is HttpException -> {
-                        while (!isSuccessful && attempts > 0) {
-                            isSuccessful = handle(e)
-                            attempts -= 1
-                        }
-                        if (isSuccessful) {
-                            action.invoke(args)
-                        } else if (e.code() == HttpURLConnection.HTTP_UNAUTHORIZED) {
-                            router.replaceScreen(Screens.Login())
-                            r
-                        } else {
-                            r
-                        }
-                    }
-                    else -> r
-                }
-        }
-    }
 }

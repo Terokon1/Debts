@@ -31,7 +31,7 @@ class AddFriendPresenter(
 
     fun addFriendClicked(username: String) {
         scope.launch {
-            when (val r = handler.runWithAuthRetryArgs(repository::postFriendRequest, username)) {
+            when (val r = handler.runWithAuthRetry({ repository.postFriendRequest(username)})) {
                 is Right -> {
                     navigateBack()
                 }

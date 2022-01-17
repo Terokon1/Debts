@@ -40,12 +40,15 @@ class FriendRequestPresenter(
 
     fun responseButtonsClickListener(id: String, status: RequestStatus) {
         scope.launch {
-            when (val r = handler.runWithAuthRetryArgs(
-                debtsApiRepository::patchFriendRequest, FriendReqPatch(
-                    id,
-                    status.toString()
-                )
-            )) {
+            when (val r = handler.runWithAuthRetry(
+                {
+                    debtsApiRepository.patchFriendRequest(
+                        FriendReqPatch(
+                            id,
+                            status.toString()
+                        )
+                    )
+                })) {
                 is Right -> {
                     items = items.filter { it.id != id }
                     withContext(Dispatchers.Main) { view?.updateRecycler(items) }

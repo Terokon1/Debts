@@ -44,7 +44,7 @@ class BottomSheetPresenter(
     }
 
     private suspend fun getFriends(): List<Friend> =
-        when (val r = handler.runWithAuthRetry(debtsApiRepository::getFriends)) {
+        when (val r = handler.runWithAuthRetry({ debtsApiRepository.getFriends() })) {
             is Right -> {
                 Log.d("Debug", "${r.value}")
                 r.value
