@@ -40,7 +40,13 @@ val appModule = module {
             get<SharedPreferences>()
         )
     }
-    factory { CreatePresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
+    factory {
+        CreatePresenter(
+            get<CiceroneHolder>().router,
+            get<HttpExceptionHandler>(),
+            get<DebtsApiRepository>()
+        )
+    }
     factory { FriendRequestPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
     factory {
         AddFriendPresenter(

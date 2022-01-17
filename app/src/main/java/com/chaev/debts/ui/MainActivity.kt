@@ -1,11 +1,9 @@
 package com.chaev.debts.ui
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
@@ -16,12 +14,12 @@ import com.chaev.debts.App
 import com.chaev.debts.R
 import com.chaev.debts.Screens
 import com.chaev.debts.databinding.ActivityMainBinding
+import com.chaev.debts.databinding.HeaderNavigationDrawerBinding
 import com.chaev.debts.domain.cicerone.CiceroneHolder
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.ui.base.IBackNavigable
 import com.chaev.debts.ui.base.IFragmentHolder
 import com.chaev.debts.ui.base.INavigationDisabled
-import com.chaev.debts.ui.meeting.login.LoginFragment
 import com.chaev.debts.utils.*
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import kotlinx.coroutines.CoroutineScope
@@ -70,6 +68,7 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                     binding.drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                     prefs.edit().apply {
                         putString(AppConsts.REFRESH_TOKEN_KEY, "")
+                        putString(AppConsts.USERNAME_KEY, "")
                     }
                     cicerone.router.replaceScreen(Screens.Login())
                     true
@@ -77,9 +76,6 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                 else -> false
             }
         }
-//        binding.topAppBar.setNavigationOnClickListener {
-//            binding.drawerLayout.openDrawer(GravityCompat.END, true)
-//        }
     }
 
     override fun onResumeFragments() {
@@ -130,6 +126,12 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
         }
     }
 
+    fun performLogin() {
+        val header = binding.navigationView.getHeaderView(0)
+        val username = header.findViewById<TextView>(R.id.username_text_view)
+        runOnUiThread{ username.text = prefs.getString(AppConsts.USERNAME_KEY, "") }
+    }
+
     private fun checkAuthorization() {
         scope.launch {
             prefs.getString(AppConsts.REFRESH_TOKEN_KEY, "")
@@ -138,11 +140,13 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                     ) {
                         is Right -> {
                             debtsApiRepository.refreshToken = token
+                            performLogin()
                             cicerone.router.replaceScreen(Screens.DebtsPager())
                         }
                         is Left -> {
                             prefs.edit().apply {
                                 putString(AppConsts.REFRESH_TOKEN_KEY, "")
+                                putString(AppConsts.USERNAME_KEY, "")
                                 apply()
                             }
                             cicerone.router.replaceScreen(Screens.Login())

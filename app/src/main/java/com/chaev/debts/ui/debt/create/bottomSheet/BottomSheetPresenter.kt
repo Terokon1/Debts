@@ -3,6 +3,7 @@ package com.chaev.debts.ui.debt.create.bottomSheet
 import android.util.Log
 import com.chaev.debts.data.exceptionsHandlers.HttpExceptionHandler
 import com.chaev.debts.domain.models.Friend
+import com.chaev.debts.domain.models.base.User
 import com.chaev.debts.domain.repositories.DebtsApiRepository
 import com.chaev.debts.ui.friend.friends.FriendsFragment
 import com.chaev.debts.utils.Left
@@ -55,8 +56,9 @@ class BottomSheetPresenter(
             }
         }
 
-    fun selectFriend() {
-
+    fun selectFriend(friend: Friend) {
+        view?.setResult(friend)
+        view?.dismiss()
     }
 
 }

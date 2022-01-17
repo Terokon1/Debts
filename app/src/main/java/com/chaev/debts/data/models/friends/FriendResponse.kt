@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class FriendResponse(
     @field:Json(name = "id")
-    val id: Int?,
+    val id: String?,
     @field:Json(name = "username")
     val username: String?
 )

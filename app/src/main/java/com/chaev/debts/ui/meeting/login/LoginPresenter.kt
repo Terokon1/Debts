@@ -38,9 +38,10 @@ class LoginPresenter(
                         debtsApiRepository.setupTokens(r.value.accessToken, r.value.refreshToken)
                         prefs.edit().apply {
                             putString(AppConsts.REFRESH_TOKEN_KEY, r.value.refreshToken)
+                            putString(AppConsts.USERNAME_KEY, username)
                             apply()
                         }
-                        AppConsts.USERNAME = username
+                        view?.setUsername()
                         navigateSuccessLogin()
                     }
                 }

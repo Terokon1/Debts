@@ -13,6 +13,7 @@ import com.chaev.debts.data.models.login.LoginResponse
 import com.chaev.debts.data.models.tokens.AccessResponse
 import com.chaev.debts.data.models.tokens.RefreshRequest
 import com.chaev.debts.data.models.tokens.TokenRequest
+import com.chaev.debts.domain.models.base.User
 import com.chaev.debts.domain.models.debt.DebtRequest
 import retrofit2.http.*
 
@@ -84,4 +85,10 @@ interface ApiService {
         @Body
         debtRequest: DebtRequestRequest
     )
+
+    @GET("/accounts/me")
+    suspend fun getMyInfo(
+        @Header("Authorization")
+        accessToken: String
+    ): User
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import com.chaev.debts.data.api.ApiService
 import com.chaev.debts.data.models.addFriend.AddFriendRequest
 import com.chaev.debts.data.models.debt.DebtRequestPatch
+import com.chaev.debts.data.models.debt.DebtRequestRequest
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.tokens.RefreshRequest
@@ -14,6 +15,7 @@ import com.chaev.debts.domain.models.debt.Debt
 import com.chaev.debts.domain.models.Friend
 import com.chaev.debts.domain.models.FriendRequest
 import com.chaev.debts.domain.models.Login
+import com.chaev.debts.domain.models.base.User
 import com.chaev.debts.domain.models.debt.DebtRequest
 import com.chaev.debts.utils.AppConsts
 import com.chaev.debts.utils.Either
@@ -25,7 +27,7 @@ class DebtsApiRepository(private val api: ApiService, private val prefs: SharedP
     fun setupTokens(access: String, refresh: String) {
         accessToken = "Bearer $access"
         refreshToken = refresh
-        prefs.edit().apply{
+        prefs.edit().apply {
             putString(AppConsts.REFRESH_TOKEN_KEY, refresh)
             apply()
         }
@@ -70,5 +72,13 @@ class DebtsApiRepository(private val api: ApiService, private val prefs: SharedP
 
     suspend fun verifyToken(refreshToken: String): Either<Exception, Unit> = Either.of {
         api.verifyToken(TokenRequest(refreshToken))
+    }
+
+    suspend fun postDebtRequest(request: DebtRequestRequest): Either<Exception, Unit> = Either.of {
+        api.postDebtRequest(accessToken, request)
+    }
+
+    suspend fun getMyInfo(): Either<Exception, User> = Either.of {
+        api.getMyInfo(accessToken)
     }
 }

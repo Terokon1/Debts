@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.chaev.debts.databinding.FragmentLoginBinding
+import com.chaev.debts.ui.MainActivity
 import com.chaev.debts.ui.base.BaseFragment
 import com.chaev.debts.ui.base.INavigationDisabled
 import kotlinx.coroutines.Dispatchers
@@ -35,6 +36,10 @@ class LoginFragment : BaseFragment(), INavigationDisabled {
             val password = binding.inputPassword.text.toString()
             presenter.onLoginClicked(username, password)
         }
+    }
+
+    fun setUsername() {
+        (requireActivity() as MainActivity).performLogin()
     }
 
     override fun onDestroyView() {
