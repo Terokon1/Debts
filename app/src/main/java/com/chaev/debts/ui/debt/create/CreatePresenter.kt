@@ -41,25 +41,26 @@ class CreatePresenter(
         router.exit()
     }
 
-
     fun sendDebtRequest(
         money: String,
         description: String,
         creditorMode: Boolean
     ) {
         scope.launch {
-            if (creditorMode) {
-                val request = DebtRequestRequest(money, me.id, result.id, description)
-                when (val r =
-                    handler.runWithAuthRetry({ debtsApiRepository.postDebtRequest(request) })) {
-                    is Right -> {
-                        view?.showSuccessMessage()
-                        navigateBack()
-                    }
-                    is Left -> {
-                        view?.showErrorMessage()
-                        Log.d("debtRequest", r.value.toString())
-                    }
+            val request: DebtRequestRequest = if (creditorMode) {
+                DebtRequestRequest(money, me.id, result.id, description)
+            } else {
+                DebtRequestRequest(money, result.id, me.id, description)
+            }
+            when (val r =
+                handler.runWithAuthRetry({ debtsApiRepository.postDebtRequest(request) })) {
+                is Right -> {
+                    view?.showSuccessMessage()
+                    navigateBack()
+                }
+                is Left -> {
+                    view?.showErrorMessage()
+                    Log.d("debtRequest", r.value.toString())
                 }
             }
         }

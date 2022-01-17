@@ -80,11 +80,9 @@ class CreateFragment : BaseFragment(), INavigationDisabled {
         }
 
         binding.chooseButton1.setOnClickListener {
-
             bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
         }
         binding.chooseButton2.setOnClickListener {
-
             bottomSheet.show(childFragmentManager, FriendsBottomSheet.TAG)
         }
         var result: Friend
