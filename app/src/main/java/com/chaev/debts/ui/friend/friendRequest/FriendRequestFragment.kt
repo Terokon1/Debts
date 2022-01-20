@@ -45,16 +45,6 @@ class FriendRequestFragment : BaseFragment() {
         presenter.detachView()
     }
 
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        val a = 1
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        val a = 1
-    }
-
     suspend fun showPatchError() {
         withContext(Dispatchers.Main) {
 //            Toast.makeText(context, "Something went wrong :(", Toast.LENGTH_SHORT).show()

@@ -8,6 +8,7 @@ import com.chaev.debts.data.models.debt.DebtRequestPatch
 import com.chaev.debts.data.models.debt.DebtRequestRequest
 import com.chaev.debts.data.models.friendRequest.FriendReqPatch
 import com.chaev.debts.data.models.login.LoginRequest
+import com.chaev.debts.data.models.registration.RegistrationRequest
 import com.chaev.debts.data.models.tokens.RefreshRequest
 import com.chaev.debts.data.models.tokens.TokenRequest
 import com.chaev.debts.domain.mappers.*
@@ -80,5 +81,9 @@ class DebtsApiRepository(private val api: ApiService, private val prefs: SharedP
 
     suspend fun getMyInfo(): Either<Exception, User> = Either.of {
         api.getMyInfo(accessToken)
+    }
+
+    suspend fun register(request: RegistrationRequest): Either<Exception, Unit> = Either.of {
+        api.postRegistration(request)
     }
 }

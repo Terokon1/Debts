@@ -28,6 +28,9 @@ class LoginPresenter(
     private fun navigateSuccessLogin() {
         router.replaceScreen(Screens.DebtsPager())
     }
+    fun navigateRegistration(){
+        router.navigateTo(Screens.Registration())
+    }
 
     fun onLoginClicked(username: String, password: String) {
         if (username.isNotEmpty() && password.isNotEmpty()) {

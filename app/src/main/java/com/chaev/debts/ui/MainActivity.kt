@@ -29,11 +29,10 @@ import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity(), IFragmentHolder {
     private val cicerone: CiceroneHolder by inject()
-    private val debtsApiRepository: DebtsApiRepository by inject()
     private val prefs: SharedPreferences by inject()
     private val navigatorHolder = cicerone.navigatorHolder
     private val navigator = AppNavigator(this, R.id.fragment_container, supportFragmentManager)
-    private val scope = CoroutineScope(Dispatchers.IO)
+    private val presenter: MainPresenter by inject()
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         if (savedInstanceState == null) {
-            checkAuthorization()
+            presenter.checkAuthorization()
         }
         binding.navigationView.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -60,16 +59,10 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
                     true
                 }
                 R.id.item3 -> {
-                    prefs.edit().apply {
-                        putString(AppConsts.REFRESH_TOKEN_KEY, "")
-                    }
                     binding.barLayout.visibility = View.INVISIBLE
                     binding.drawerLayout.closeDrawer(GravityCompat.START, true)
                     binding.drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
-                    prefs.edit().apply {
-                        putString(AppConsts.REFRESH_TOKEN_KEY, "")
-                        putString(AppConsts.USERNAME_KEY, "")
-                    }
+                    presenter.clearPrefs()
                     cicerone.router.replaceScreen(Screens.Login())
                     true
                 }
@@ -85,24 +78,18 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
         currentFragment?.let { onFragmentChanged(it) }
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.attachView(this)
+    }
+
     override fun onPause() {
         navigatorHolder.removeNavigator()
-        saveTokens()
+        presenter.saveTokens()
+        presenter.detachView()
         super.onPause()
     }
 
-    override fun onDestroy() {
-        saveTokens()
-        super.onDestroy()
-    }
-
-    private fun saveTokens() {
-        val prefs = getSharedPreferences(AppConsts.TOKENS_KEY, MODE_PRIVATE)
-        prefs.edit().apply {
-            putString(AppConsts.REFRESH_TOKEN_KEY, debtsApiRepository.refreshToken)
-            apply()
-        }
-    }
 
     override fun onAttach(fragment: Fragment) {
         onFragmentChanged(fragment)
@@ -129,30 +116,8 @@ class MainActivity : AppCompatActivity(), IFragmentHolder {
     fun performLogin() {
         val header = binding.navigationView.getHeaderView(0)
         val username = header.findViewById<TextView>(R.id.username_text_view)
-        runOnUiThread{ username.text = prefs.getString(AppConsts.USERNAME_KEY, "") }
+        runOnUiThread { username.text = prefs.getString(AppConsts.USERNAME_KEY, "") }
     }
 
-    private fun checkAuthorization() {
-        scope.launch {
-            prefs.getString(AppConsts.REFRESH_TOKEN_KEY, "")
-                ?.let { token ->
-                    when (debtsApiRepository.verifyToken(token)
-                    ) {
-                        is Right -> {
-                            debtsApiRepository.refreshToken = token
-                            performLogin()
-                            cicerone.router.replaceScreen(Screens.DebtsPager())
-                        }
-                        is Left -> {
-                            prefs.edit().apply {
-                                putString(AppConsts.REFRESH_TOKEN_KEY, "")
-                                putString(AppConsts.USERNAME_KEY, "")
-                                apply()
-                            }
-                            cicerone.router.replaceScreen(Screens.Login())
-                        }
-                    }
-                }
-        }
-    }
+
 }

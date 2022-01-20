@@ -14,6 +14,7 @@ import com.chaev.debts.ui.debt.debts.DebtsPresenter
 import com.chaev.debts.ui.friend.friendRequest.FriendRequestPresenter
 import com.chaev.debts.ui.friend.friends.FriendsPresenter
 import com.chaev.debts.ui.meeting.login.LoginPresenter
+import com.chaev.debts.ui.meeting.registration.RegistrationPresenter
 import com.chaev.debts.utils.AppConsts
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module
@@ -63,6 +64,7 @@ val appModule = module {
         )
     }
     factory { BottomSheetPresenter(get<DebtsApiRepository>(), get<HttpExceptionHandler>()) }
+    factory { RegistrationPresenter(get<CiceroneHolder>().router, get<DebtsApiRepository>()) }
     single {
         androidApplication().applicationContext.getSharedPreferences(
             AppConsts.TOKENS_KEY,

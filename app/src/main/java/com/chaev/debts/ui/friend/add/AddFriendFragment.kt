@@ -28,7 +28,6 @@ class AddFriendFragment : BaseFragment(), INavigationDisabled {
         binding.addButton.setOnClickListener {
             val username = binding.username.text.toString()
             presenter.addFriendClicked(username)
-//            presenter.navigateBack()
             Toast.makeText(context, "Friend request sent", Toast.LENGTH_SHORT).show()
         }
     }

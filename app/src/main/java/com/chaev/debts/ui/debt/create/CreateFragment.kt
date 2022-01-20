@@ -143,5 +143,4 @@ class CreateFragment : BaseFragment(), INavigationDisabled {
         }
     }
 
-
 }

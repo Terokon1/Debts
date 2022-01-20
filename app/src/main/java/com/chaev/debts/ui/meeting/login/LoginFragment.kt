@@ -34,7 +34,14 @@ class LoginFragment : BaseFragment(), INavigationDisabled {
         binding.loginButton.setOnClickListener {
             val username = binding.inputUsername.text.toString()
             val password = binding.inputPassword.text.toString()
-            presenter.onLoginClicked(username, password)
+            if (username.isNotEmpty() && password.isNotEmpty()) {
+                presenter.onLoginClicked(username, password)
+            } else {
+                Toast.makeText(context, "Fill in all the fields", Toast.LENGTH_SHORT).show()
+            }
+        }
+        binding.registrationButton.setOnClickListener {
+            presenter.navigateRegistration()
         }
     }
 

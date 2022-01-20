@@ -10,6 +10,7 @@ import com.chaev.debts.data.models.friendRequest.FriendReqResponse
 import com.chaev.debts.data.models.friends.FriendResponse
 import com.chaev.debts.data.models.login.LoginRequest
 import com.chaev.debts.data.models.login.LoginResponse
+import com.chaev.debts.data.models.registration.RegistrationRequest
 import com.chaev.debts.data.models.tokens.AccessResponse
 import com.chaev.debts.data.models.tokens.RefreshRequest
 import com.chaev.debts.data.models.tokens.TokenRequest
@@ -86,9 +87,15 @@ interface ApiService {
         debtRequest: DebtRequestRequest
     )
 
-    @GET("/accounts/me")
+    @GET("/accounts/me/")
     suspend fun getMyInfo(
         @Header("Authorization")
         accessToken: String
     ): User
+
+    @POST("/accounts/registration/")
+    suspend fun postRegistration(
+        @Body
+        registration: RegistrationRequest
+    )
 }

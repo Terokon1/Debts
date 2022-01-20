@@ -7,6 +7,7 @@ import com.chaev.debts.ui.debt.pager.DebtsPagerFragment
 import com.chaev.debts.ui.friend.friendRequest.FriendRequestFragment
 import com.chaev.debts.ui.friend.friends.FriendsFragment
 import com.chaev.debts.ui.meeting.login.LoginFragment
+import com.chaev.debts.ui.meeting.registration.RegistrationFragment
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 object Screens {
@@ -17,4 +18,5 @@ object Screens {
     fun AddFriend() = FragmentScreen { AddFriendFragment() }
     fun Login() = FragmentScreen { LoginFragment() }
     fun DebtsPager() = FragmentScreen { DebtsPagerFragment() }
+    fun Registration() = FragmentScreen { RegistrationFragment() }
 }
